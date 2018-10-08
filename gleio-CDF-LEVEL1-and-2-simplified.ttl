@@ -1,0 +1,2919 @@
+@prefix : <http://lei.info/voc/> .
+@prefix L1: <http://lei.info/voc/l1/> .
+@prefix L2: <http://lei.info/voc/l2/> .
+@prefix rr: <http://www.gleif.org/data/schema/rr/2016/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://lei.info/voc/> .
+
+<http://lei.info/voc/> rdf:type owl:Ontology ;
+                        owl:versionIRI <http://lei.info/voc/> ;
+                        rdfs:comment """Contact
+Robert Trypuz (robert.trypuz@makolab.com)"""@en ,
+                                     """Global Legal Entity Identifier Ontology (GLEIO) for LEI-CDF LEVEL 2
+
+This ontology - Global Legal Entity Identifier Ontology (GLEIO in short) - has been created by MakoLab's R&D Group. GLEIO is a semantic representation of LEI Common Data File format for LEVEL 1 and 2."""@en ;
+                        owl:versionInfo "version 1.0"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://lei.info/voc/l1/level1CDFFName
+L1:level1CDFFName rdf:type owl:AnnotationProperty ;
+                  rdfs:label "level 1 CDF file name"@en .
+
+
+###  http://lei.info/voc/l1/level1CDFFType
+L1:level1CDFFType rdf:type owl:AnnotationProperty ;
+                  rdfs:label "level 1 CDF file type name"@en .
+
+
+###  http://lei.info/voc/l2/level2CDFFName
+L2:level2CDFFName rdf:type owl:AnnotationProperty ;
+                  rdfs:label "level 2 CDF file name"@en .
+
+
+###  http://lei.info/voc/l2/level2CDFFType
+L2:level2CDFFType rdf:type owl:AnnotationProperty ;
+                  rdfs:label "level 2 CDF file type name"@en .
+
+
+###  http://www.w3.org/2002/07/owl#maxQualifiedCardinality
+owl:maxQualifiedCardinality rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#minQualifiedCardinality
+owl:minQualifiedCardinality rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#qualifiedCardinality
+owl:qualifiedCardinality rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#closeMatch
+<http://www.w3.org/2004/02/skos/core#closeMatch> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+<http://www.w3.org/2004/02/skos/core#definition> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#exactMatch
+<http://www.w3.org/2004/02/skos/core#exactMatch> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://lei.info/voc/l1/address
+L1:address rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain L1:LegalEntity ;
+           rdfs:range L1:Address ;
+           L1:level1CDFFType "lei:AddressType"^^xsd:string ;
+           rdfs:label "has address"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> "An address of the legal entity"@en .
+
+
+###  http://lei.info/voc/l1/alternativeLanguageHeadquartersAddress
+L1:alternativeLanguageHeadquartersAddress rdf:type owl:ObjectProperty ;
+                                          rdfs:subPropertyOf L1:address ;
+                                          L1:level1CDFFName "ALTERNATIVE_LANGUAGE_HEADQUARTERS_ADDRESS"^^xsd:string ,
+                                                            "AddressTypeEnum"^^xsd:string ,
+                                                            "OtherAddress"^^xsd:string ,
+                                                            "OtherAddresses"^^xsd:string ;
+                                          L1:level1CDFFType "lei:AddressTypeEnum"^^xsd:string ,
+                                                            "lei:OtherAddressType"^^xsd:string ,
+                                                            "lei:OtherAddressesType"^^xsd:string ;
+                                          rdfs:label "has alternative language headquarters address"@en ;
+                                          <http://www.w3.org/2004/02/skos/core#definition> "Address of the headquarters of the entity in the legal jurisdiction, in an alternative language used in the legal jurisdiction."@en .
+
+
+###  http://lei.info/voc/l1/alternativeLanguageLegalAddress
+L1:alternativeLanguageLegalAddress rdf:type owl:ObjectProperty ;
+                                   rdfs:subPropertyOf L1:address ;
+                                   L1:level1CDFFName "ALTERNATIVE_LANGUAGE_LEGAL_ADDRESS"^^xsd:string ,
+                                                     "AddressTypeEnum"^^xsd:string ,
+                                                     "OtherAddress"^^xsd:string ,
+                                                     "OtherAddresses"^^xsd:string ;
+                                   L1:level1CDFFType "lei:AddressTypeEnum"^^xsd:string ,
+                                                     "lei:OtherAddressType"^^xsd:string ,
+                                                     "lei:OtherAddressesType"^^xsd:string ;
+                                   rdfs:label "has alternative language legal address"@en ;
+                                   <http://www.w3.org/2004/02/skos/core#definition> "Registered address of the entity in the legal jurisdiction, in an alternative language used in the legal jurisdiction."@en .
+
+
+###  http://lei.info/voc/l1/associatedEntityWithLEI
+L1:associatedEntityWithLEI rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf owl:topObjectProperty ;
+                           rdf:type owl:FunctionalProperty ;
+                           rdfs:domain L1:LegalEntity ;
+                           rdfs:range L1:LegalEntity ;
+                           L1:level1CDFFName "AssociatedEntity"^^xsd:string ,
+                                             "AssociatedLEI"^^xsd:string ;
+                           L1:level1CDFFType "lei:AssociatedEntityType"^^xsd:string ,
+                                             "lei:LEIType"^^xsd:string ;
+                           rdfs:comment "It is used instead of hasAssociatedEntityWithoutLEI."@en ;
+                           rdfs:label "has associated entity with LEI"@en ;
+                           <http://www.w3.org/2004/02/skos/core#definition> "The property assigns the entity with LEI associated with the legal entity of this registration."@en .
+
+
+###  http://lei.info/voc/l1/autoASCIITransliteratedHeadquartersAddress
+L1:autoASCIITransliteratedHeadquartersAddress rdf:type owl:ObjectProperty ;
+                                              rdfs:subPropertyOf L1:address ;
+                                              L1:level1CDFFName "AUTO_ASCII_TRANSLITERATED_HEADQUARTERS_ADDRESS"^^xsd:string ,
+                                                                "TransliteratedAddressTypeEnum"^^xsd:string ,
+                                                                "TransliteratedOtherAddress"^^xsd:string ,
+                                                                "TransliteratedOtherAddresses"^^xsd:string ;
+                                              L1:level1CDFFType "lei:TransliteratedAddressTypeEnum"^^xsd:string ,
+                                                                "lei:TransliteratedOtherAddressType"^^xsd:string ,
+                                                                "lei:TransliteratedOtherAddressesType"^^xsd:string ;
+                                              rdfs:label "has auto ASCII transliterated headquarters address"@en ;
+                                              <http://www.w3.org/2004/02/skos/core#definition> "Address of the headquarters of the entity, transliterated to ASCII characters, autotransliterated by the managing LOU."@en .
+
+
+###  http://lei.info/voc/l1/autoASCIITransliteratedLegalAddress
+L1:autoASCIITransliteratedLegalAddress rdf:type owl:ObjectProperty ;
+                                       rdfs:subPropertyOf L1:address ;
+                                       L1:level1CDFFName "AUTO_ASCII_TRANSLITERATED_LEGAL_ADDRESS"^^xsd:string ,
+                                                         "TransliteratedAddressTypeEnum"^^xsd:string ,
+                                                         "TransliteratedOtherAddress"^^xsd:string ,
+                                                         "TransliteratedOtherAddresses"^^xsd:string ;
+                                       L1:level1CDFFType "lei:TransliteratedAddressTypeEnum"^^xsd:string ,
+                                                         "lei:TransliteratedOtherAddressType"^^xsd:string ,
+                                                         "lei:TransliteratedOtherAddressesType"^^xsd:string ;
+                                       rdfs:label "has auto ASCII transliterated legal address"@en ;
+                                       <http://www.w3.org/2004/02/skos/core#definition> "Registered address of the entity in the legal jurisdiction, transliterated to ASCII characters, autotransliterated by the managing LOU."@en .
+
+
+###  http://lei.info/voc/l1/entityCategory
+L1:entityCategory rdf:type owl:ObjectProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain L1:LegalEntity ;
+                  rdfs:range L1:EntityCategory ;
+                  L1:level1CDFFType "EntityCategory"^^xsd:string ;
+                  rdfs:label "has legal entity category"@en ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "Assigns to a legal entity its category. These categories are based on use cases specified in LEI-ROC policies, found at http://www.leiroc.org/list/leiroc_gls/index.htm (LEI-CDF V2.0)"@en .
+
+
+###  http://lei.info/voc/l1/entityExpirationReason
+L1:entityExpirationReason rdf:type owl:ObjectProperty ,
+                                   owl:FunctionalProperty ;
+                          rdfs:domain L1:LegalEntity ;
+                          rdfs:range L1:EntityExpirationReason ;
+                          L1:level1CDFFName "EntityExpirationReason"^^xsd:string ;
+                          L1:level1CDFFType "lei:EntityExpirationReasonEnum"^^xsd:string ;
+                          rdfs:comment """This element shall be present if entity expiration date is assigned by means of hasEntityExpirationDate datatype property to LE, and omitted otherwise.
+
+See also hasEntityExpirationDate datatype property."""@en ;
+                          rdfs:label "has entity expiration reason"@en ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "The property assigns to legal entity the reason that it ceased to exist and/or operate."@en .
+
+
+###  http://lei.info/voc/l1/fundFamily
+L1:fundFamily rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf L1:associatedEntityWithLEI ;
+              L1:level1CDFFName "FUND_FAMILY"^^xsd:string ;
+              L1:level1CDFFType "lei:AssociatedEntityTypeEnum"^^xsd:string ;
+              rdfs:label "has fund family"@en ;
+              <http://www.w3.org/2004/02/skos/core#definition> "The legal entity is a fund, and the associated entity is the manager of the fund."@en .
+
+
+###  http://lei.info/voc/l1/headquartersAddress
+L1:headquartersAddress rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf L1:address ;
+                       rdf:type owl:FunctionalProperty ;
+                       L1:level1CDFFName "HeadquartersAddress"^^xsd:string ;
+                       L1:level1CDFFType "lei:AddressType"^^xsd:string ;
+                       rdfs:label "has headquarters address"@en ;
+                       <http://www.w3.org/2004/02/skos/core#definition> "The address of the headquarters of the legal entity."@en .
+
+
+###  http://lei.info/voc/l1/identifiedBy
+L1:identifiedBy rdf:type owl:ObjectProperty ;
+                owl:inverseOf L1:identifies ;
+                rdf:type owl:FunctionalProperty ,
+                         owl:InverseFunctionalProperty ;
+                rdfs:domain L1:LegalEntity ;
+                rdfs:range L1:LegalEntityIdentifier ;
+                L1:level1CDFFName "LEI"^^xsd:string ;
+                L1:level1CDFFType "lei:LEIType"^^xsd:string ;
+                rdfs:label "is identified by"@en ;
+                <http://www.w3.org/2004/02/skos/core#definition> "The property used to assign legal entity identifiers to legal entities."@en .
+
+
+###  http://lei.info/voc/l1/identifies
+L1:identifies rdf:type owl:ObjectProperty ,
+                       owl:FunctionalProperty ,
+                       owl:InverseFunctionalProperty ;
+              rdfs:domain L1:LegalEntityIdentifier ;
+              rdfs:range L1:LegalEntity ;
+              L1:level1CDFFName "LEI"^^xsd:string ;
+              L1:level1CDFFType "lei:LEIType"^^xsd:string ;
+              rdfs:label "identifies"@en ;
+              <http://www.w3.org/2004/02/skos/core#definition> "The property assigns a (business or global) legal entity identifier to a legal entity."@en .
+
+
+###  http://lei.info/voc/l1/legalAddress
+L1:legalAddress rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf L1:address ;
+                rdf:type owl:FunctionalProperty ;
+                L1:level1CDFFName "LegalAddress"^^xsd:string ;
+                L1:level1CDFFType "lei:AddressType"^^xsd:string ;
+                rdfs:label "has legal address"@en ;
+                <http://www.w3.org/2004/02/skos/core#definition> "The address of legal formation of the legal entity as recorded in the registration of the entity in its legal jurisdiction."@en .
+
+
+###  http://lei.info/voc/l1/legalEntityStatus
+L1:legalEntityStatus rdf:type owl:ObjectProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain L1:LegalEntity ;
+                     rdfs:range L1:EntityStatus ;
+                     L1:level1CDFFType "EntityStatus"^^xsd:string ;
+                     rdfs:label "has status"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "The property assigns the status (from the class LegalEntityStatus) to legal entity."@en .
+
+
+###  http://lei.info/voc/l1/managingLOU
+L1:managingLOU rdf:type owl:ObjectProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain L1:LegalEntityIdentifier ;
+               L1:level1CDFFName "ManagingLOU"^^xsd:string ;
+               L1:level1CDFFType "lei:LEIType"^^xsd:string ;
+               rdfs:label "has managing LOU"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> "The LOU that is responsible for administering this LEI registration."@en .
+
+
+###  http://lei.info/voc/l1/otherValidationAuthority
+L1:otherValidationAuthority rdf:type owl:ObjectProperty ;
+                            rdfs:domain L1:LegalEntity ;
+                            rdfs:range L1:ValidationAuthority ;
+                            L1:level1CDFFName "OtherValidationAuthorities"^^xsd:string ,
+                                              "OtherValidationAuthority"^^xsd:string ;
+                            L1:level1CDFFType "lei:OtherValidationAuthoritiesType"^^xsd:string ,
+                                              "lei:OtherValidationAuthorityType"^^xsd:string ;
+                            rdfs:label "has other validation authority"@en ;
+                            <http://www.w3.org/2004/02/skos/core#definition> "An additional registration authority used by the LOU to validate the entity data."@en .
+
+
+###  http://lei.info/voc/l1/preferredASCIITransliteratedHeadquartersAddress
+L1:preferredASCIITransliteratedHeadquartersAddress rdf:type owl:ObjectProperty ;
+                                                   rdfs:subPropertyOf L1:address ;
+                                                   L1:level1CDFFName "PREFERRED_ASCII_TRANSLITERATED_HEADQUARTERS_ADDRESS"^^xsd:string ,
+                                                                     "TransliteratedAddressTypeEnum"^^xsd:string ,
+                                                                     "TransliteratedOtherAddress"^^xsd:string ,
+                                                                     "TransliteratedOtherAddresses"^^xsd:string ;
+                                                   L1:level1CDFFType "lei:TransliteratedAddressTypeEnum"^^xsd:string ,
+                                                                     "lei:TransliteratedOtherAddressType"^^xsd:string ,
+                                                                     "lei:TransliteratedOtherAddressesType"^^xsd:string ;
+                                                   rdfs:label "has preferred ASCII transliterated headquarters address"@en ;
+                                                   <http://www.w3.org/2004/02/skos/core#definition> "Registered address of the entity in the legal jurisdiction, transliterated to ASCII characters, provided by the entity for this purpose."@en .
+
+
+###  http://lei.info/voc/l1/preferredASCIITransliteratedLegalAddress
+L1:preferredASCIITransliteratedLegalAddress rdf:type owl:ObjectProperty ;
+                                            rdfs:subPropertyOf L1:address ;
+                                            L1:level1CDFFName "PREFERRED_ASCII_TRANSLITERATED_LEGAL_ADDRESS"^^xsd:string ,
+                                                              "TransliteratedAddressTypeEnum"^^xsd:string ,
+                                                              "TransliteratedOtherAddress"^^xsd:string ,
+                                                              "TransliteratedOtherAddresses"^^xsd:string ;
+                                            L1:level1CDFFType "lei:TransliteratedAddressTypeEnum"^^xsd:string ,
+                                                              "lei:TransliteratedOtherAddressType"^^xsd:string ,
+                                                              "lei:TransliteratedOtherAddressesType"^^xsd:string ;
+                                            rdfs:label "has preferred ASCII transliterated legal address"@en ;
+                                            <http://www.w3.org/2004/02/skos/core#definition> "Registered address of the entity in the legal jurisdiction, transliterated to ASCII characters, provided by the entity for this purpose."@en .
+
+
+###  http://lei.info/voc/l1/primaryValidationAuthority
+L1:primaryValidationAuthority rdf:type owl:ObjectProperty ,
+                                       owl:FunctionalProperty ;
+                              rdfs:domain L1:LegalEntity ;
+                              rdfs:range L1:ValidationAuthority ;
+                              L1:level1CDFFType "ValidationAuthorityType"^^xsd:string ;
+                              rdfs:label "has primary validation authority"@en ;
+                              <http://www.w3.org/2004/02/skos/core#definition> "The (primary) registration authority used by the LOU to validate GLEI data."@en .
+
+
+###  http://lei.info/voc/l1/registrationAuthority
+L1:registrationAuthority rdf:type owl:ObjectProperty ;
+                         rdfs:domain L1:LegalEntity ;
+                         L1:level1CDFFType "RegistrationAuthorityType"^^xsd:string ;
+                         rdfs:label "has registration authority"@en ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "A registration authority"@en .
+
+
+###  http://lei.info/voc/l1/registrationStatus
+L1:registrationStatus rdf:type owl:ObjectProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:domain L1:LegalEntityIdentifier ;
+                      rdfs:range L1:RegistrationStatus ;
+                      L1:level1CDFFName "RegistrationStatus"^^xsd:string ;
+                      L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+                      rdfs:comment """This is not to be confused with the status of the legal entity itself; see hasEntityStatus.
+
+See also RegistrationStatus class."""@en ;
+                      rdfs:label "has registration status"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "The status of the legal entity's LEI registration with the Managing LOU."@en .
+
+
+###  http://lei.info/voc/l1/successorEntityWithLEI
+L1:successorEntityWithLEI rdf:type owl:ObjectProperty ,
+                                   owl:FunctionalProperty ;
+                          rdfs:domain L1:LegalEntity ;
+                          rdfs:range L1:LegalEntity ;
+                          L1:level1CDFFName "SuccessorEntity"^^xsd:string ,
+                                            "SuccessorLEI"^^xsd:string ;
+                          L1:level1CDFFType "lei:LEIType"^^xsd:string ,
+                                            "lei:SuccessorEntityType"^^xsd:string ;
+                          rdfs:label "has successor entity with LEI"@en ;
+                          <http://www.w3.org/2004/02/skos/core#definition> """The surviving/new legal entity which continues/replaces this registration. 
+
+The successor entity should have LEI."""@en .
+
+
+###  http://lei.info/voc/l1/validationSource
+L1:validationSource rdf:type owl:ObjectProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain L1:LegalEntity ;
+                    rdfs:range L1:ValidationSource ;
+                    L1:level1CDFFType "ValidationSources"^^xsd:string ;
+                    rdfs:comment "It is omitted if the validation status is not known or not revealed."@en ;
+                    rdfs:label "has validation source"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "The property assigns the current validation status (from ValidationSource class) to this LEI record."@en .
+
+
+###  http://lei.info/voc/l2/childLegalEntity
+L2:childLegalEntity rdf:type owl:ObjectProperty ;
+                    rdfs:domain L2:Relationship ;
+                    rdfs:range L2:LegalEntity ;
+                    L2:level2CDFFName "NodeID"^^xsd:string ,
+                                      "StartNode"^^xsd:string ;
+                    L2:level2CDFFType "rr:LEIType"^^xsd:string ,
+                                      "rr:NodeType"^^xsd:string ;
+                    rdfs:label "has child legal entity"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "The entity at the \"start\" of a directional relationship."@en .
+
+
+###  http://lei.info/voc/l2/managingLOU
+L2:managingLOU rdf:type owl:ObjectProperty ;
+               rdfs:domain L2:Relationship ;
+               rdfs:range L2:LocalOperatingUnit ;
+               L2:level2CDFFName "ManagingLOU"^^xsd:string ;
+               L2:level2CDFFType "rr:LEIType"^^xsd:string ;
+               rdfs:label "has managing LOU"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> "The LOU that is responsible for administering this relationship record."@en .
+
+
+###  http://lei.info/voc/l2/measurementMethod
+L2:measurementMethod rdf:type owl:ObjectProperty ;
+                     rdfs:domain L2:RelationshipQuantifier ;
+                     rdfs:range L2:MeasurementMethod ;
+                     L2:level2CDFFName "MeasurementMethod"^^xsd:string ;
+                     L2:level2CDFFType "rr:RelationshipQuantifierType"^^xsd:string ;
+                     rdfs:label "has measurement method"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "This property specifies the method of measurement (or set of rules) used to quantitatively categorize the relationship."@en .
+
+
+###  http://lei.info/voc/l2/parentLegalEntity
+L2:parentLegalEntity rdf:type owl:ObjectProperty ;
+                     rdfs:domain L2:Relationship ;
+                     rdfs:range L2:LegalEntity ;
+                     L2:level2CDFFName "EndNode"^^xsd:string ,
+                                       "NodeID"^^xsd:string ;
+                     L2:level2CDFFType "rr:LEIType"^^xsd:string ,
+                                       "rr:NodeType"^^xsd:string ;
+                     rdfs:label "has parent legal entity"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "The entity at the \"end\" of a directional relationship."@en .
+
+
+###  http://lei.info/voc/l2/qualifierCategory
+L2:qualifierCategory rdf:type owl:ObjectProperty ;
+                     rdfs:domain L2:RelationshipQualifier ;
+                     rdfs:range L2:RelationshipQualifierCategory ;
+                     L2:level2CDFFName "QualifierCategory"^^xsd:string ;
+                     L2:level2CDFFType "rr:QualifierCategoryTypeEnum"^^xsd:string ;
+                     rdfs:label "has qualifier category"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "This property specifies the additional qualitative attributes that help to categorize the relationship."@en .
+
+
+###  http://lei.info/voc/l2/qualifierDimension
+L2:qualifierDimension rdf:type owl:ObjectProperty ;
+                      rdfs:domain L2:RelationshipQualifier ;
+                      rdfs:range L2:RelationshipQualifierDimension ;
+                      L2:level2CDFFName "QualifierDimension"^^xsd:string ;
+                      L2:level2CDFFType "rr:QualifierDimensionEnum"^^xsd:string ;
+                      rdfs:label "has qualifier dimension"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "This property designates the optional list of additional qualitative attributes that help to categorize the relationship."@en .
+
+
+###  http://lei.info/voc/l2/quantifierUnit
+L2:quantifierUnit rdf:type owl:ObjectProperty ;
+                  rdfs:domain L2:RelationshipQuantifier ;
+                  rdfs:range L2:RelationshipQuantifierUnit ;
+                  L2:level2CDFFName "QuantifierUnits"^^xsd:string ;
+                  L2:level2CDFFType "rr:QuantifierUnitsTypeEnum"^^xsd:string ;
+                  rdfs:comment "enumeration PERCENTAGE"@en ;
+                  rdfs:label "has quantifier unit"@en ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "This property specifies the units, where applicable, of a measurement made on a relationship."@en .
+
+
+###  http://lei.info/voc/l2/registrationStatus
+L2:registrationStatus rdf:type owl:ObjectProperty ;
+                      rdfs:domain L2:Relationship ;
+                      rdfs:range L2:RegistrationStatus ;
+                      L2:level2CDFFName "RegistrationStatus"^^xsd:string ;
+                      L2:level2CDFFType "rr:RegistrationStatusEnum"^^xsd:string ;
+                      rdfs:comment """This is not to be confused with the status of the relationship itself; see hasRelationshipStatus.
+
+See also RegistrationStatus class."""@en ;
+                      rdfs:label "has registration status"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "The status of the legal entity's relationship record registration with the managing LOU."@en .
+
+
+###  http://lei.info/voc/l2/relationshipPeriod
+L2:relationshipPeriod rdf:type owl:ObjectProperty ;
+                      rdfs:domain L2:Relationship ;
+                      rdfs:range [ rdf:type owl:Class ;
+                                   owl:unionOf ( L2:AccountingPeriod
+                                                 L2:DocumentFilingPeriod
+                                                 L2:RelationshipPeriod
+                                               )
+                                 ] ;
+                      L2:level2CDFFName "RelationshipPeriod"^^xsd:string ;
+                      L2:level2CDFFType "rr:RelationshipPeriodType"^^xsd:string ;
+                      rdfs:label "has relationship period"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "This property assigns one set of start and end dates for a particular type of period, for example, the duration of the relationship itself, the filing or validity period of any documents demonstrating the relationship, or the accounting period they refer to."@en .
+
+
+###  http://lei.info/voc/l2/relationshipQualifier
+L2:relationshipQualifier rdf:type owl:ObjectProperty ;
+                         rdfs:domain L2:Relationship ;
+                         rdfs:range L2:RelationshipQualifier ;
+                         L2:level2CDFFName "RelationshipQualifier"^^xsd:string ;
+                         L2:level2CDFFType "rr:RelationshipQualifierType"^^xsd:string ;
+                         rdfs:label "has relationship qualifier"@en ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "This property specifies relationship qualifier information."@en .
+
+
+###  http://lei.info/voc/l2/relationshipQuantifier
+L2:relationshipQuantifier rdf:type owl:ObjectProperty ;
+                          rdfs:domain L2:Relationship ;
+                          rdfs:range L2:RelationshipQuantifier ;
+                          L2:level2CDFFName "RelationshipQuantifier"^^xsd:string ;
+                          L2:level2CDFFType "rr:RelationshipQuantifierType"^^xsd:string ;
+                          rdfs:label "has relationship quantifier"@en ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "This property specifies any additional quantitative attributes that help to categorize the relationship."@en .
+
+
+###  http://lei.info/voc/l2/relationshipStatus
+L2:relationshipStatus rdf:type owl:ObjectProperty ;
+                      rdfs:domain L2:Relationship ;
+                      rdfs:range L2:RelationshipStatus ;
+                      L2:level2CDFFName "RelationshipStatus"^^xsd:string ;
+                      L2:level2CDFFType "rr:RelationshipStatusEnum"^^xsd:string ;
+                      rdfs:label "has relationship status"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "This property assigns the status of the legal entities' relationship itself: ACTIVE or INACTIVE."@en .
+
+
+###  http://lei.info/voc/l2/relationshipType
+L2:relationshipType rdf:type owl:ObjectProperty ;
+                    rdfs:domain L2:Relationship ;
+                    rdfs:range L2:RelationshipType ;
+                    L2:level2CDFFName "RelationshipType"^^xsd:string ;
+                    L2:level2CDFFType "rr:RelationshipTypeEnum"^^xsd:string ;
+                    rdfs:label "has relationship type"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "This property assigns a unique code designating the specific category of a directional relationship between two legal entities."@en .
+
+
+###  http://lei.info/voc/l2/validationDocument
+L2:validationDocument rdf:type owl:ObjectProperty ;
+                      rdfs:domain L2:Relationship ;
+                      rdfs:range L2:ValidationDocument ;
+                      L2:level2CDFFName "ValidationDocuments"^^xsd:string ;
+                      L2:level2CDFFType "rr:ValidationDocumentsTypeEnum"^^xsd:string ;
+                      rdfs:label "has relationship validation document type"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "This property assigns a type of source document(s) used for validating the relationship."@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://lei.info/voc/l1/addressDescriptionComponent
+L1:addressDescriptionComponent rdf:type owl:DatatypeProperty ;
+                               rdfs:label "address description component"@en ;
+                               <http://www.w3.org/2004/02/skos/core#definition> "address description component"@en .
+
+
+###  http://lei.info/voc/l1/addressNumber
+L1:addressNumber rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf L1:addressDescriptionComponent ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain L1:Address ;
+                 rdfs:range [ rdf:type rdfs:Datatype ;
+                              owl:unionOf ( rdf:PlainLiteral
+                                            xsd:string
+                                          )
+                            ] ;
+                 L1:level1CDFFType "AddressNumber"^^xsd:string ,
+                                   "lei:Tokenized500Type"^^xsd:string ;
+                 rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                 rdfs:label "has address number"@en ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "Optional, additional structured version of an external house number, or range of numbers, contained in one of the address line elements. This could be a numeral, a letter or code made up of mixed characters (e.g. 221B)."@en .
+
+
+###  http://lei.info/voc/l1/addressNumberWithinBuilding
+L1:addressNumberWithinBuilding rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf L1:addressDescriptionComponent ;
+                               rdf:type owl:FunctionalProperty ;
+                               rdfs:domain L1:Address ;
+                               rdfs:range [ rdf:type rdfs:Datatype ;
+                                            owl:unionOf ( rdf:PlainLiteral
+                                                          xsd:string
+                                                        )
+                                          ] ;
+                               L1:level1CDFFName "AddressNumberWithinBuilding"^^xsd:string ;
+                               L1:level1CDFFType "lei:Tokenized500Type"^^xsd:string ;
+                               rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                               rdfs:label "has address number with building"@en ;
+                               <http://www.w3.org/2004/02/skos/core#definition> "Optional, additional structured version of an internal location number, or range of numbers, contained in one of the address line elements.This could be a numeral, a letter or code made up of mixed characters (e.g. 13) of a floor, suite or apartment within a building identified e.g. by an AddressNumber element."@en .
+
+
+###  http://lei.info/voc/l1/alternativeLanguageEntityName
+L1:alternativeLanguageEntityName rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf L1:otherEntityName ;
+                                 rdfs:domain L1:LegalEntity ;
+                                 rdfs:range [ rdf:type rdfs:Datatype ;
+                                              owl:unionOf ( rdf:PlainLiteral
+                                                            xsd:string
+                                                          )
+                                            ] ;
+                                 L1:level1CDFFName "ALTERNATIVE_LANGUAGE_LEGAL_NAME"^^xsd:string ;
+                                 L1:level1CDFFType "lei:EntityNameTypeEnum"^^xsd:string ,
+                                                   "lei:Tokenized500Type"^^xsd:string ;
+                                 rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                                 rdfs:label "has other entity name"@en ;
+                                 <http://www.w3.org/2004/02/skos/core#definition> "Registered name of the entity in an alternative language in the legal jurisdiction in which the entity is registered."@en .
+
+
+###  http://lei.info/voc/l1/associatedEntityWithoutLEI
+L1:associatedEntityWithoutLEI rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf L1:legalEntityDescriptionComponent ;
+                              rdf:type owl:FunctionalProperty ;
+                              rdfs:domain L1:LegalEntity ;
+                              rdfs:range [ rdf:type rdfs:Datatype ;
+                                           owl:unionOf ( rdf:PlainLiteral
+                                                         xsd:string
+                                                       )
+                                         ] ;
+                              L1:level1CDFFName "AssociatedEntity"^^xsd:string ,
+                                                "AssociatedEntityName"^^xsd:string ;
+                              L1:level1CDFFType "lei:AssociatedEntityType"^^xsd:string ,
+                                                "lei:NameType"^^xsd:string ,
+                                                "lei:Tokenized500Type"^^xsd:string ;
+                              rdfs:comment "It is used instead of hasAssociatedEntityWithLEI."@en ;
+                              rdfs:label "has associated entity without LEI"@en ;
+                              <http://www.w3.org/2004/02/skos/core#definition> "The property assigns the name of an entity associated with the legal entity of this registration."@en .
+
+
+###  http://lei.info/voc/l1/autoASCIITransliteratedLegalName
+L1:autoASCIITransliteratedLegalName rdf:type owl:DatatypeProperty ;
+                                    rdfs:subPropertyOf L1:transliteratedOtherEntityName ;
+                                    rdfs:domain L1:LegalEntity ;
+                                    rdfs:range [ rdf:type rdfs:Datatype ;
+                                                 owl:unionOf ( rdf:PlainLiteral
+                                                               xsd:string
+                                                             )
+                                               ] ;
+                                    L1:level1CDFFName "AUTO_ASCII_TRANSLITERATED_LEGAL_ADDRESS"^^xsd:string ;
+                                    L1:level1CDFFType "lei:Tokenized500Type"^^xsd:string ,
+                                                      "lei:TransliteratedEntityNameTypeEnum"^^xsd:string ;
+                                    rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                                    rdfs:label "has ASCII-transliterated representation of legal name"@en ;
+                                    <http://www.w3.org/2004/02/skos/core#definition> "Legal name of the entity transliterated to ASCII characters, auto-transliterated by the managing LOU."@en .
+
+
+###  http://lei.info/voc/l1/city
+L1:city rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf L1:addressDescriptionComponent ;
+        rdf:type owl:FunctionalProperty ;
+        rdfs:domain L1:Address ;
+        rdfs:range [ rdf:type rdfs:Datatype ;
+                     owl:unionOf ( rdf:PlainLiteral
+                                   xsd:string
+                                 )
+                   ] ;
+        L1:level1CDFFName "City"^^xsd:string ;
+        L1:level1CDFFType "lei:Tokenized500Type"^^xsd:string ;
+        rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+        rdfs:label "has city"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> "The property assigns to an address of legal entity a name of the city."@en .
+
+
+###  http://lei.info/voc/l1/country
+L1:country rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf L1:addressDescriptionComponent ;
+           rdf:type owl:FunctionalProperty ;
+           rdfs:domain L1:Address ;
+           rdfs:range xsd:string ;
+           L1:level1CDFFName "Country"^^xsd:string ;
+           L1:level1CDFFType "lei:CountryCodeType"^^xsd:string ;
+           rdfs:comment """minLength 2 
+maxLength 2
+pattern ([A-Z]{2})"""@en ;
+           rdfs:label "has country code"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> "The property assigns the 2-character ISO 3166-1 country code of the country."@en .
+
+
+###  http://lei.info/voc/l1/date
+L1:date rdf:type owl:DatatypeProperty ;
+        rdfs:range xsd:dateTimeStamp ;
+        rdfs:label "date"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> "date"@en .
+
+
+###  http://lei.info/voc/l1/entityExpirationDate
+L1:entityExpirationDate rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf L1:date ,
+                                           L1:legalEntityDescriptionComponent ;
+                        rdf:type owl:FunctionalProperty ;
+                        rdfs:domain L1:LegalEntity ;
+                        rdfs:range xsd:dateTimeStamp ;
+                        L1:level1CDFFName "EntityExpirationDate"^^xsd:string ;
+                        L1:level1CDFFType "lei:LEIDateTimeProfile"^^xsd:string ;
+                        rdfs:comment """Omitted if LE has not ceased to operate.
+
+If LE ceased to operate (due to dissolution, merger or acquisition), them it is required to point out the expiration reason. Use hasEntityExpirationReason object property."""@en ,
+                                     """pattern
+([^\\\\.]*|([^\\\\.]*(\\\\.((\\\\d){1,3})){0,1}))(Z|\\\\+([01][0- 9]|2[0-3]):([0-5][0-9])|-([01][0-9]|2[0-3]):([0- 5][0-9]))"""@en ;
+                        rdfs:label "has entity expiration date"@en ;
+                        <http://www.w3.org/2004/02/skos/core#definition> "The date that the legal entity ceased to operate, whether due to dissolution, merger or acquisition."@en .
+
+
+###  http://lei.info/voc/l1/entityLegalFormCode
+L1:entityLegalFormCode rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf L1:legalEntityDescriptionComponent ;
+                       rdf:type owl:FunctionalProperty ;
+                       rdfs:domain L1:LegalEntity ;
+                       rdfs:range xsd:string ;
+                       L1:level1CDFFName "EntityLegalFormCode"^^xsd:string ,
+                                         "LegalForm"^^xsd:string ;
+                       L1:level1CDFFType "lei:LegalFormEnum"^^xsd:string ,
+                                         "lei:LegalFormType"^^xsd:string ;
+                       rdfs:comment """pattern 
+(([A-Z][A-Z0-9]{3}|[A-Z0-9][A-Z][A-Z0-9]{2}|[A-Z0-9]{2}[A-Z][A-Z0-9]|[A-Z0- 9]{3}[A-Z]))|(9999)|(8888)"""@en ;
+                       rdfs:label "has entity legal form"@en ;
+                       <http://www.w3.org/2004/02/skos/core#definition> """The legal form of the entity, taken from the ISO Entity Legal Form (ELF) code list maintained by GLEIF.
+
+Please note that the XML schema validates for all Legal Form values conforming to the ISO 20275 standard (section \"Code Structure\"); four uppercase alphanumeric characters in any combination except for purely numeric codes. Some possible combinations may not be valid Entity Legal Form (ELF) entries."""@en .
+
+
+###  http://lei.info/voc/l1/fundFamilyWithoutLEI
+L1:fundFamilyWithoutLEI rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf L1:associatedEntityWithoutLEI ;
+                        rdfs:domain L1:LegalEntity ;
+                        rdfs:range [ rdf:type rdfs:Datatype ;
+                                     owl:unionOf ( rdf:PlainLiteral
+                                                   xsd:string
+                                                 )
+                                   ] ;
+                        L1:level1CDFFName "FUND_FAMILY"^^xsd:string ;
+                        L1:level1CDFFType "lei:AssociatedEntityTypeEnum"^^xsd:string ,
+                                          "lei:Tokenized500Type"^^xsd:string ;
+                        rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                        rdfs:label "has fund family"@en ;
+                        <http://www.w3.org/2004/02/skos/core#definition> "The legal entity is a fund, and the associated entity is the manager of the fund."@en .
+
+
+###  http://lei.info/voc/l1/initialRegistrationDate
+L1:initialRegistrationDate rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf L1:date ,
+                                              L1:leiDescriptionComponent ;
+                           rdf:type owl:FunctionalProperty ;
+                           rdfs:domain L1:LegalEntityIdentifier ;
+                           rdfs:range xsd:dateTimeStamp ;
+                           L1:level1CDFFName "InitialRegistrationDate"^^xsd:string ;
+                           L1:level1CDFFType "lei:LEIDateTimeProfile"^^xsd:string ;
+                           rdfs:comment """pattern
+([^\\\\.]*|([^\\\\.]*(\\\\.((\\\\d){1,3})){0,1}))(Z|\\\\+([01][0- 9]|2[0-3]):([0-5][0-9])|-([01][0-9]|2[0-3]):([0- 5][0-9]))"""@en ;
+                           rdfs:label "has initial registration date"@en ;
+                           <http://www.w3.org/2004/02/skos/core#definition> "The property assigns date/time the record of general legal entity identifier was created."@en .
+
+
+###  http://lei.info/voc/l1/lastUpdateDate
+L1:lastUpdateDate rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf L1:date ,
+                                     L1:leiDescriptionComponent ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain L1:LegalEntityIdentifier ;
+                  rdfs:range xsd:dateTimeStamp ;
+                  L1:level1CDFFName "LastUpdateDate"^^xsd:string ;
+                  L1:level1CDFFType "lei:LEIDateTimeProfile"^^xsd:string ;
+                  rdfs:comment """pattern
+([^\\\\.]*|([^\\\\.]*(\\\\.((\\\\d){1,3})){0,1}))(Z|\\\\+([01][0- 9]|2[0-3]):([0-5][0-9])|-([01][0-9]|2[0-3]):([0- 5][0-9]))"""@en ;
+                  rdfs:label "has last update date"@en ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "Date/time the LEI record was most recently updated."@en .
+
+
+###  http://lei.info/voc/l1/legalEntityDescriptionComponent
+L1:legalEntityDescriptionComponent rdf:type owl:DatatypeProperty ;
+                                   rdfs:label "legal entity description component"@en ;
+                                   <http://www.w3.org/2004/02/skos/core#definition> "legal entity description component"@en .
+
+
+###  http://lei.info/voc/l1/legalJurisdiction
+L1:legalJurisdiction rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf L1:legalEntityDescriptionComponent ;
+                     rdf:type owl:FunctionalProperty ;
+                     rdfs:domain L1:LegalEntity ;
+                     rdfs:range xsd:string ;
+                     L1:level1CDFFName "LegalJurisdiction"^^xsd:string ;
+                     L1:level1CDFFType "lei:JurisdictionCodeType"^^xsd:string ;
+                     rdfs:comment """The property assigns the 2-character ISO 3166-1 country code of the country or the 4- to 6-character ISO 3166-2 region code of the region.
+
+minLength 2 
+maxLength 2
+pattern ([A-Z]{2})
+
+OR
+
+minLength 4
+maxLength 6
+pattern ([A-Z]{2}-[A-Z0-9]{1,3})"""@en ;
+                     rdfs:label "has jurisdiction of legal formation and registration"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "The jurisdiction of legal formation and registration of the entity (and upon which the Legal Form data element is also dependent)."@en .
+
+
+###  http://lei.info/voc/l1/legalName
+L1:legalName rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf L1:legalEntityDescriptionComponent ,
+                                L1:name ;
+             rdf:type owl:FunctionalProperty ;
+             rdfs:domain L1:LegalEntity ;
+             rdfs:range [ rdf:type rdfs:Datatype ;
+                          owl:unionOf ( rdf:PlainLiteral
+                                        xsd:string
+                                      )
+                        ] ;
+             L1:level1CDFFName "LegalName"^^xsd:string ;
+             L1:level1CDFFType "lei:NameType"^^xsd:string ;
+             rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+             rdfs:label "has legal name"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "The legal name of the entity."@en .
+
+
+###  http://lei.info/voc/l1/leiCode
+L1:leiCode rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf L1:leiDescriptionComponent ;
+           rdf:type owl:FunctionalProperty ;
+           rdfs:domain L1:LegalEntityIdentifier ;
+           rdfs:range xsd:string ;
+           L1:level1CDFFName "LEI"^^xsd:string ;
+           L1:level1CDFFType "LEIType"^^xsd:string ;
+           rdfs:comment """minLength 20
+maxLength 20
+pattern ([0-9A-Z]{18}[0-9]{2})"""@en ;
+           rdfs:label "has global legal entity identifier code"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> "Property assigning to the general legal entity identifier a unique 20-character alphanumeric code, defined in the ISO 17442 standard."@en ;
+           <http://www.w3.org/2004/02/skos/core#exactMatch> "http://schema.org/leiCode"^^xsd:anyURI .
+
+
+###  http://lei.info/voc/l1/leiDescriptionComponent
+L1:leiDescriptionComponent rdf:type owl:DatatypeProperty ;
+                           rdfs:label "LEI description component"@en ;
+                           <http://www.w3.org/2004/02/skos/core#definition> "LEI description component"@en .
+
+
+###  http://lei.info/voc/l1/mailRouting
+L1:mailRouting rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf L1:addressDescriptionComponent ;
+               rdf:type owl:FunctionalProperty ;
+               rdfs:domain L1:Address ;
+               rdfs:range [ rdf:type rdfs:Datatype ;
+                            owl:unionOf ( rdf:PlainLiteral
+                                          xsd:string
+                                        )
+                          ] ;
+               L1:level1CDFFType "MailRouting"^^xsd:string ,
+                                 "lei:Tokenized500Type"^^xsd:string ;
+               rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+               rdfs:label "has mail routing"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> "Optional free text address line to hold content from other address lines containing explicit routing information (this element's presence indicates that this address is a routing address."@en .
+
+
+###  http://lei.info/voc/l1/name
+L1:name rdf:type owl:DatatypeProperty ;
+        rdfs:label "name"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> "name"@en .
+
+
+###  http://lei.info/voc/l1/nextRenewalDate
+L1:nextRenewalDate rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf L1:date ,
+                                      L1:leiDescriptionComponent ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain L1:LegalEntityIdentifier ;
+                   rdfs:range xsd:dateTimeStamp ;
+                   L1:level1CDFFName "NextRenewalDate"^^xsd:string ;
+                   L1:level1CDFFType "lei:LEIDateTimeProfile"^^xsd:string ;
+                   rdfs:comment """pattern
+([^\\\\.]*|([^\\\\.]*(\\\\.((\\\\d){1,3})){0,1}))(Z|\\\\+([01][0- 9]|2[0-3]):([0-5][0-9])|-([01][0-9]|2[0-3]):([0- 5][0-9]))"""@en ;
+                   rdfs:label "has next renewal date"@en ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "The next date by which the LEI registration should be renewed and re-certified by the legal entity."@en .
+
+
+###  http://lei.info/voc/l1/otherEntityName
+L1:otherEntityName rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf L1:legalEntityDescriptionComponent ,
+                                      L1:name ;
+                   rdfs:domain L1:LegalEntity ;
+                   rdfs:range [ rdf:type rdfs:Datatype ;
+                                owl:unionOf ( rdf:PlainLiteral
+                                              xsd:string
+                                            )
+                              ] ;
+                   L1:level1CDFFName "OtherEntityName"^^xsd:string ,
+                                     "OtherEntityNames"^^xsd:string ;
+                   L1:level1CDFFType "lei:OtherEntityNameType"^^xsd:string ,
+                                     "lei:OtherEntityNamesType"^^xsd:string ;
+                   rdfs:label "has other entity name"@en ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "An alternative name or representation of a name for the legal entity, excluding transliterations. An optional list of other names."@en .
+
+
+###  http://lei.info/voc/l1/otherLegalForm
+L1:otherLegalForm rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf L1:legalEntityDescriptionComponent ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain L1:LegalEntity ;
+                  rdfs:range xsd:string ;
+                  L1:level1CDFFName "OtherLegalForm"^^xsd:string ;
+                  L1:level1CDFFType "lei:Tokenized500Type"^^xsd:string ;
+                  rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                  rdfs:label "has other legal form"@en ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "The property assigns a legacy code or textual description for the legal entity's legal form, used until a current code from the GLEIF-maintained list can be used."@en .
+
+
+###  http://lei.info/voc/l1/otherRegistrationAuthorityID
+L1:otherRegistrationAuthorityID rdf:type owl:DatatypeProperty ;
+                                rdfs:subPropertyOf L1:registrationAuthorityDescriptionComponent ;
+                                L1:level1CDFFName "OtherRegistrationAuthorityID"^^xsd:string ;
+                                L1:level1CDFFType "lei:Tokenized500Type"^^xsd:string ;
+                                rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                                rdfs:label "has other validation authority ID"@en ;
+                                <http://www.w3.org/2004/02/skos/core#definition> "A legacy / historical reference code of a registration authority which is not yet entered in the Registration Authorities Code List (RAL) maintained by GLEIF, or the designation of an interim register until such time as an entry from RAL can be delivered."@en .
+
+
+###  http://lei.info/voc/l1/otherValidationAuthorityID
+L1:otherValidationAuthorityID rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf L1:validationAuthorityDescriptionComponent ;
+                              rdf:type owl:FunctionalProperty ;
+                              rdfs:domain L1:ValidationAuthority ;
+                              rdfs:range xsd:string ;
+                              L1:level1CDFFName "OtherValidationAuthorityID"^^xsd:string ;
+                              L1:level1CDFFType "lei:Tokenized500Type"^^xsd:string ;
+                              rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                              rdfs:label "has other validation authority ID"@en ;
+                              <http://www.w3.org/2004/02/skos/core#definition> "A legacy / historical reference code of a registration authority which is not yet entered in the Registration Authorities Code List (RAL) maintained by GLEIF, or the designation of an interim register until such time as an entry from RAL can be delivered."@en .
+
+
+###  http://lei.info/voc/l1/postalCode
+L1:postalCode rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf L1:addressDescriptionComponent ;
+              rdf:type owl:FunctionalProperty ;
+              rdfs:domain L1:Address ;
+              rdfs:range [ rdf:type rdfs:Datatype ;
+                           owl:unionOf ( rdf:PlainLiteral
+                                         xsd:string
+                                       )
+                         ] ;
+              L1:level1CDFFName "PostalCode"^^xsd:string ;
+              L1:level1CDFFType "lei:Tokenized500Type"^^xsd:string ;
+              rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+              rdfs:label "has postal code"@en ;
+              <http://www.w3.org/2004/02/skos/core#definition> "The property assigns the postal code to the address of legal entity."@en .
+
+
+###  http://lei.info/voc/l1/preferredASCIITransliteratedLegalName
+L1:preferredASCIITransliteratedLegalName rdf:type owl:DatatypeProperty ;
+                                         rdfs:subPropertyOf L1:transliteratedOtherEntityName ;
+                                         rdfs:domain L1:LegalEntity ;
+                                         rdfs:range [ rdf:type rdfs:Datatype ;
+                                                      owl:unionOf ( rdf:PlainLiteral
+                                                                    xsd:string
+                                                                  )
+                                                    ] ;
+                                         L1:level1CDFFName "PREFERRED_ASCII_TRANSLITERATED_LEGAL_NAME"^^xsd:string ;
+                                         L1:level1CDFFType "lei:Tokenized500Type"^^xsd:string ,
+                                                           "lei:TransliteratedEntityNameTypeEnum"^^xsd:string ;
+                                         rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                                         rdfs:label "has preferred ASCII-transliterated representation of legal name"@en ;
+                                         <http://www.w3.org/2004/02/skos/core#definition> "Legal name of the entity transliterated to ASCII  characters, provided by the entity for this purpose."@en .
+
+
+###  http://lei.info/voc/l1/previousLegalName
+L1:previousLegalName rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf L1:otherEntityName ;
+                     rdfs:domain L1:LegalEntity ;
+                     rdfs:range [ rdf:type rdfs:Datatype ;
+                                  owl:unionOf ( rdf:PlainLiteral
+                                                xsd:string
+                                              )
+                                ] ;
+                     L1:level1CDFFName "PREVIOUS_LEGAL_NAME"@en ;
+                     L1:level1CDFFType "lei:EntityNameTypeEnum"^^xsd:string ,
+                                       "lei:Tokenized500Type"^^xsd:string ;
+                     rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                     rdfs:label "has previous legal name"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "A primary legal name previously used by the legal entity."@en .
+
+
+###  http://lei.info/voc/l1/region
+L1:region rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf L1:addressDescriptionComponent ;
+          rdf:type owl:FunctionalProperty ;
+          rdfs:domain L1:Address ;
+          rdfs:range xsd:string ;
+          L1:level1CDFFName "Region"^^xsd:string ;
+          L1:level1CDFFType "lei:RegionCodeType"^^xsd:string ;
+          rdfs:comment """minLength 4
+maxLength 6
+pattern ([A-Z]{2}-[A-Z0-9]{1,3})"""@en ;
+          rdfs:label "has subdivision code"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "The property assigns the 4- to 6-character ISO 3166-2 region code of the region."@en .
+
+
+###  http://lei.info/voc/l1/registrationAuthorityDescriptionComponent
+L1:registrationAuthorityDescriptionComponent rdf:type owl:DatatypeProperty ;
+                                             rdfs:label "registration authority description component"@en ;
+                                             <http://www.w3.org/2004/02/skos/core#definition> "registration authority description component"@en .
+
+
+###  http://lei.info/voc/l1/registrationAuthorityEntityID
+L1:registrationAuthorityEntityID rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf L1:registrationAuthorityDescriptionComponent ;
+                                 L1:level1CDFFName "RegistrationAuthorityEntityID"^^xsd:string ;
+                                 L1:level1CDFFType "lei:Tokenized500Type"^^xsd:string ;
+                                 rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                                 rdfs:label "has validation authority entity ID"@en ;
+                                 <http://www.w3.org/2004/02/skos/core#definition> "The identifier of the entity at the indicated registration authority. Typically, the identifier of the legal entity as maintained by a business registry in the jurisdiction of legal registration, or if the entity is one that is not recorded in a business registry (e.g. one of the varieties of funds registered instead with financial regulators), the identifier of the entity in the appropriate registration authority."@en .
+
+
+###  http://lei.info/voc/l1/registrationAuthorityID
+L1:registrationAuthorityID rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf L1:registrationAuthorityDescriptionComponent ;
+                           L1:level1CDFFName "RegistrationAuthorityID"^^xsd:string ;
+                           L1:level1CDFFType "lei:RegistrationAuthorityEnum"^^xsd:string ;
+                           rdfs:comment "pattern RA\\\\d{6}"@en ;
+                           rdfs:label "has registration authority ID"@en ;
+                           <http://www.w3.org/2004/02/skos/core#definition> "The reference code of the registration authority, taken from the Registration Authorities Code List maintained by GLEIF."@en .
+
+
+###  http://lei.info/voc/l1/streetAddress
+L1:streetAddress rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf L1:addressDescriptionComponent ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain L1:Address ;
+                 rdfs:range [ rdf:type rdfs:Datatype ;
+                              owl:unionOf ( rdf:PlainLiteral
+                                            xsd:string
+                                          )
+                            ] ;
+                 L1:level1CDFFName "AdditionalAddressLine"@en ,
+                                   "FirstAddressLine"^^xsd:string ;
+                 L1:level1CDFFType "lei:Tokenized500Type"^^xsd:string ;
+                 rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ,
+                              "Replaced Line1 by FirstAddressLine and Line2 etc. by AdditionalAddressLine in LEI-CDF 2.0."@en ;
+                 rdfs:label "has street address"@en ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "The property assigns to the address of legal entity the complete description of the street address."@en .
+
+
+###  http://lei.info/voc/l1/successorEntityWithoutLEI
+L1:successorEntityWithoutLEI rdf:type owl:DatatypeProperty ;
+                             rdfs:subPropertyOf L1:legalEntityDescriptionComponent ;
+                             rdf:type owl:FunctionalProperty ;
+                             rdfs:domain L1:LegalEntity ;
+                             rdfs:range [ rdf:type rdfs:Datatype ;
+                                          owl:unionOf ( rdf:PlainLiteral
+                                                        xsd:string
+                                                      )
+                                        ] ;
+                             L1:level1CDFFName "SuccessorEntity"^^xsd:string ,
+                                               "SuccessorEntityName"^^xsd:string ;
+                             L1:level1CDFFType "lei:NameType"^^xsd:string ,
+                                               "lei:SuccessorEntityType"^^xsd:string ,
+                                               "lei:Tokenized500Type"^^xsd:string ;
+                             rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                             rdfs:label "has successor entity with LEI"@en ;
+                             <http://www.w3.org/2004/02/skos/core#definition> """The surviving/new legal entity which continues/replaces this registration. 
+
+The successor entity does not have LEI. So the name of the successor entity is assigned."""@en .
+
+
+###  http://lei.info/voc/l1/tradingOrOperatingName
+L1:tradingOrOperatingName rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf L1:otherEntityName ;
+                          rdfs:domain L1:LegalEntity ;
+                          rdfs:range [ rdf:type rdfs:Datatype ;
+                                       owl:unionOf ( rdf:PlainLiteral
+                                                     xsd:string
+                                                   )
+                                     ] ;
+                          L1:level1CDFFName "TRADING_OR_OPERATING_NAME"@en ;
+                          L1:level1CDFFType "lei:EntityNameTypeEnum"^^xsd:string ,
+                                            "lei:Tokenized500Type"^^xsd:string ;
+                          rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                          rdfs:label "has trading or operating name"@en ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "A \"trading as\", \"brand name\" or \"operating under\" name currently used by this entity in addition to, but not replacing, the (primary) legal, official registered name."@en .
+
+
+###  http://lei.info/voc/l1/transliteratedOtherEntityName
+L1:transliteratedOtherEntityName rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf L1:legalEntityDescriptionComponent ,
+                                                    L1:name ;
+                                 rdfs:domain L1:LegalEntity ;
+                                 rdfs:range [ rdf:type rdfs:Datatype ;
+                                              owl:unionOf ( rdf:PlainLiteral
+                                                            xsd:string
+                                                          )
+                                            ] ;
+                                 L1:level1CDFFName "TransliteratedOtherEntityName"^^xsd:string ,
+                                                   "TransliteratedOtherEntityNames"^^xsd:string ;
+                                 L1:level1CDFFType "lei:TransliteratedOtherEntityNameType"^^xsd:string ,
+                                                   "lei:TransliteratedOtherEntityNamesType"^^xsd:string ;
+                                 rdfs:label "has other entity name"@en ;
+                                 <http://www.w3.org/2004/02/skos/core#definition> "ASCII-transliterated (i.e. Latin- or Romanized) representation of a name for the legal entity. It is an optional."@en .
+
+
+###  http://lei.info/voc/l1/validationAuthorityDescriptionComponent
+L1:validationAuthorityDescriptionComponent rdf:type owl:DatatypeProperty ;
+                                           rdfs:label "validation authority description component"@en ;
+                                           <http://www.w3.org/2004/02/skos/core#definition> "validation authority description component"@en .
+
+
+###  http://lei.info/voc/l1/validationAuthorityEntityID
+L1:validationAuthorityEntityID rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf L1:validationAuthorityDescriptionComponent ;
+                               rdf:type owl:FunctionalProperty ;
+                               rdfs:domain L1:ValidationAuthority ;
+                               rdfs:range xsd:string ;
+                               L1:level1CDFFName "ValidationAuthorityEntityID"^^xsd:string ;
+                               L1:level1CDFFType "lei:Tokenized500Type"^^xsd:string ;
+                               rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                               rdfs:label "has validation authority entity ID"@en ;
+                               <http://www.w3.org/2004/02/skos/core#definition> "The identifier of the entity at the indicated registration authority. Typically, the identifier of the legal entity as maintained by a business registry in the jurisdiction of legal registration, or if the entity is one that is not recorded in a business registry (e.g. one of the varieties of funds registered instead with financial regulators), the identifier of the entity in the appropriate registration authority."@en .
+
+
+###  http://lei.info/voc/l1/validationAuthorityID
+L1:validationAuthorityID rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf L1:validationAuthorityDescriptionComponent ;
+                         rdf:type owl:FunctionalProperty ;
+                         rdfs:domain L1:ValidationAuthority ;
+                         rdfs:range xsd:string ;
+                         L1:level1CDFFName "ValidationAuthorityID"^^xsd:string ;
+                         L1:level1CDFFType "lei:RegistrationAuthorityEnum"^^xsd:string ;
+                         rdfs:comment "pattern RA\\\\d{6}"@en ;
+                         rdfs:label "has validation authority ID"@en ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "The reference code of the registration authority, taken from the Registration Authorities Code List (RAL) maintained by GLEIF."@en .
+
+
+###  http://lei.info/voc/l2/hasEndDate
+L2:hasEndDate rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain L2:RelationshipPeriodType ;
+              rdfs:range xsd:dateTimeStamp ;
+              L2:level2CDFFName "EndDate"^^xsd:string ;
+              L2:level2CDFFType "LEIDateTimeProfile"^^xsd:string ;
+              rdfs:comment """pattern
+([^\\\\.]*|([^\\\\.]*(\\\\.((\\\\d){1,3})){0,1}))(Z|\\\\+([01][0- 9]|2[0-3]):([0-5][0-9])|-([01][0-9]|2[0-3]):([0- 5][0-9]))"""@en ;
+              rdfs:label "has end date"@en ;
+              <http://www.w3.org/2004/02/skos/core#definition> "The end date for a particular period relevant to the relationship."@en .
+
+
+###  http://lei.info/voc/l2/hasLastUpdateDate
+L2:hasLastUpdateDate rdf:type owl:DatatypeProperty ;
+                     rdfs:domain L2:Relationship ;
+                     rdfs:range xsd:dateTimeStamp ;
+                     L2:level2CDFFName "LastUpdateDate"^^xsd:string ;
+                     L2:level2CDFFType "rr:LEIDateTimeProfile"^^xsd:string ;
+                     rdfs:comment """pattern
+([^\\\\.]*|([^\\\\.]*(\\\\.((\\\\d){1,3})){0,1}))(Z|\\\\+([01][0- 9]|2[0-3]):([0-5][0-9])|-([01][0-9]|2[0-3]):([0- 5][0-9]))"""@en ;
+                     rdfs:label "has last update date"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "The date at which the information was most recently updated by the managing LOU."@en .
+
+
+###  http://lei.info/voc/l2/initialRegistrationDate
+L2:initialRegistrationDate rdf:type owl:DatatypeProperty ;
+                           rdfs:domain L2:Relationship ;
+                           rdfs:range xsd:dateTimeStamp ;
+                           L2:level2CDFFName "InitialRegistrationDate"^^xsd:string ;
+                           L2:level2CDFFType "rr:LEIDateTimeProfile"^^xsd:string ;
+                           rdfs:comment """pattern
+([^\\\\.]*|([^\\\\.]*(\\\\.((\\\\d){1,3})){0,1}))(Z|\\\\+([01][0- 9]|2[0-3]):([0-5][0-9])|-([01][0-9]|2[0-3]):([0- 5][0-9]))"""@en ;
+                           rdfs:label "has initial registration date"@en ;
+                           <http://www.w3.org/2004/02/skos/core#definition> "The date at which the relationship information was first collected by the managing LOU."@en .
+
+
+###  http://lei.info/voc/l2/nextRenewalDate
+L2:nextRenewalDate rdf:type owl:DatatypeProperty ;
+                   rdfs:domain L2:Relationship ;
+                   rdfs:range xsd:dateTimeStamp ;
+                   L2:level2CDFFName "NextRenewalDate"^^xsd:string ;
+                   L2:level2CDFFType "rr:LEIDateTimeProfile"^^xsd:string ;
+                   rdfs:comment """pattern
+([^\\\\.]*|([^\\\\.]*(\\\\.((\\\\d){1,3})){0,1}))(Z|\\\\+([01][0- 9]|2[0-3]):([0-5][0-9])|-([01][0-9]|2[0-3]):([0- 5][0-9]))"""@en ;
+                   rdfs:label "has next renewal date"@en ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "The next date by which the relationship information must be renewed and re-certified by the legal entity."@en .
+
+
+###  http://lei.info/voc/l2/quantifierAmount
+L2:quantifierAmount rdf:type owl:DatatypeProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain L2:RelationshipQuantifier ;
+                    rdfs:range xsd:decimal ;
+                    L2:level2CDFFName "QuantifierAmount"^^xsd:string ;
+                    L2:level2CDFFType "xs:decimal"^^xsd:string ;
+                    rdfs:label "has quantifier amount"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "This property specifies the quantity measured as a decimal (positive or negative) number, using a \".\" as the decimal point, with no spaces, and without thousand delimiters (e.g. \",\")."@en .
+
+
+###  http://lei.info/voc/l2/startDate
+L2:startDate rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain L2:RelationshipPeriodType ;
+             rdfs:range xsd:dateTimeStamp ;
+             L2:level2CDFFName "StartDate"^^xsd:string ;
+             L2:level2CDFFType "LEIDateTimeProfile"^^xsd:string ;
+             rdfs:comment """pattern
+([^\\\\.]*|([^\\\\.]*(\\\\.((\\\\d){1,3})){0,1}))(Z|\\\\+([01][0- 9]|2[0-3]):([0-5][0-9])|-([01][0-9]|2[0-3]):([0- 5][0-9]))"""@en ;
+             rdfs:label "has start date"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "The start date for a particular period relevant to the relationship."@en .
+
+
+###  http://lei.info/voc/l2/validationReference
+L2:validationReference rdf:type owl:DatatypeProperty ;
+                       rdfs:domain L2:Relationship ;
+                       rdfs:range xsd:anyURI ;
+                       L2:level2CDFFName "ValidationReference"^^xsd:string ;
+                       L2:level2CDFFType "rr:Tokenized500Type"^^xsd:string ;
+                       rdfs:comment """An element of this type has minimum length of one character and may not contain any of: the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, shall not begin or end with a space (#x20) character, or a sequence of two or more adjacent space characters.
+
+restriction of xs:string
+minLength 1
+maxLength 500
+pattern \\\\S+( \\\\S+)*"""@en ;
+                       rdfs:label "has validation reference"@en ;
+                       <http://www.w3.org/2004/02/skos/core#definition> "This property specifies a reference to a specific document or other source used as the basis of relationship validation for this relationship record."@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://lei.info/voc/l1/Address
+L1:Address rdf:type owl:Class ;
+           rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                    owl:onProperty L1:addressNumber ;
+                                                    owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                    owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                      owl:unionOf ( rdf:PlainLiteral
+                                                                                    xsd:string
+                                                                                  )
+                                                                    ]
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty L1:addressNumber ;
+                                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                      owl:unionOf ( rdf:PlainLiteral
+                                                                                    xsd:string
+                                                                                  )
+                                                                    ]
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ,
+                           [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                    owl:onProperty L1:addressNumberWithinBuilding ;
+                                                    owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                    owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                      owl:unionOf ( rdf:PlainLiteral
+                                                                                    xsd:string
+                                                                                  )
+                                                                    ]
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty L1:addressNumberWithinBuilding ;
+                                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                      owl:unionOf ( rdf:PlainLiteral
+                                                                                    xsd:string
+                                                                                  )
+                                                                    ]
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ,
+                           [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                    owl:onProperty L1:mailRouting ;
+                                                    owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                    owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                      owl:unionOf ( rdf:PlainLiteral
+                                                                                    xsd:string
+                                                                                  )
+                                                                    ]
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty L1:mailRouting ;
+                                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                      owl:unionOf ( rdf:PlainLiteral
+                                                                                    xsd:string
+                                                                                  )
+                                                                    ]
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ,
+                           [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                    owl:onProperty L1:postalCode ;
+                                                    owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                    owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                      owl:unionOf ( rdf:PlainLiteral
+                                                                                    xsd:string
+                                                                                  )
+                                                                    ]
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty L1:postalCode ;
+                                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                      owl:unionOf ( rdf:PlainLiteral
+                                                                                    xsd:string
+                                                                                  )
+                                                                    ]
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ,
+                           [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                    owl:onProperty L1:region ;
+                                                    owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                    owl:onDataRange xsd:string
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty L1:region ;
+                                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onDataRange xsd:string
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty L1:city ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                               owl:unionOf ( rdf:PlainLiteral
+                                                             xsd:string
+                                                           )
+                                             ]
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty L1:country ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty L1:streetAddress ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                               owl:unionOf ( rdf:PlainLiteral
+                                                             xsd:string
+                                                           )
+                                             ]
+                           ] ;
+           L1:level1CDFFName "HeadquartersAddress"^^xsd:string ,
+                             "LegalAddress"^^xsd:string ,
+                             "OtherAddresses"^^xsd:string ,
+                             "TransliteratedOtherAddresses"^^xsd:string ;
+           L1:level1CDFFType "lei:AddressType"^^xsd:string ;
+           rdfs:label "address"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> "An address is a geographical location of Legal Entity. It is specified by providing information about country, subdivision, city, street or postal code. Legal Entity can have many addresses: the address of legal formation, the address of the headquarters of the entity and others. The role of the address of the legal entity is specified by object properties such as :hasLegalAddress and :hasHeadquartersAddress."@en ;
+           <http://www.w3.org/2004/02/skos/core#exactMatch> "http://schema.org/Address"^^xsd:anyURI .
+
+
+###  http://lei.info/voc/l1/EntityCategory
+L1:EntityCategory rdf:type owl:Class ;
+                  L1:level1CDFFName "EntityCategory"^^xsd:string ;
+                  L1:level1CDFFType "lei:EntityCategoryTypeEnum"^^xsd:string ;
+                  rdfs:label "legal entity category"@en ;
+                  <http://www.w3.org/2004/02/skos/core#definition> """Indicates the category of entity. 
+
+These categories are based on use cases specified in LEI-ROC policies, found at http://www.leiroc.org/list/leiroc_gls/index.htm"""@en .
+
+
+###  http://lei.info/voc/l1/EntityExpirationReason
+L1:EntityExpirationReason rdf:type owl:Class ;
+                          L1:level1CDFFName "EntityExpirationReason"^^xsd:string ;
+                          L1:level1CDFFType "lei:EntityExpirationReasonEnum"^^xsd:string ;
+                          rdfs:comment "Entity expiration reason shall be assigned to a legal entity if the legal entity expired and omitted otherwise. If a legal entity expired, then the entity expiration reason shall be assigned to the legal entity together with its expiration date (see :hasEntityExpirationDate data property)."@en ;
+                          rdfs:label "entity expiration reason"@en ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "A legal entity expiration reason is a reason that a legal entity ceased to exist and/or operate."@en .
+
+
+###  http://lei.info/voc/l1/EntityStatus
+L1:EntityStatus rdf:type owl:Class ;
+                L1:level1CDFFName "EntityStatus"^^xsd:string ;
+                L1:level1CDFFType "lei:EntityStatusEnum"^^xsd:string ;
+                rdfs:label "entity status"@en ;
+                <http://www.w3.org/2004/02/skos/core#definition> "A legal entity status is a status of the legal entity. There are two possible values of the status: \"active\" or \"inactive\". This is not to be confused with the status of the general legal entity identifier registration (see :RegistrationStatus). If a legal entity is related by :successorLegalEntity with other legal entity, then its legal entity status is the last status of the legal entity before this record was superseded. This status is not necessarily the current status of the legal entity."@en .
+
+
+###  http://lei.info/voc/l1/LegalEntity
+L1:LegalEntity rdf:type owl:Class ;
+               owl:equivalentClass L2:LegalEntity ;
+               rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:entityCategory ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:EntityCategory
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:entityCategory ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:EntityCategory
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:entityExpirationReason ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:EntityExpirationReason
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:entityExpirationReason ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:EntityExpirationReason
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:fundFamily ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:LegalEntity
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:fundFamily ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:LegalEntity
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:identifiedBy ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:LegalEntityIdentifier
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:identifiedBy ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:LegalEntityIdentifier
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:primaryValidationAuthority ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:ValidationAuthority
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:primaryValidationAuthority ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:ValidationAuthority
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:registrationAuthority ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:RegistrationAuthority
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:registrationAuthority ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:RegistrationAuthority
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:successorEntityWithLEI ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:LegalEntity
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:successorEntityWithLEI ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:LegalEntity
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:validationSource ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:ValidationSource
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:validationSource ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass L1:ValidationSource
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:entityExpirationDate ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange xsd:dateTime
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:entityExpirationDate ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange xsd:dateTimeStamp
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:entityLegalFormCode ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange xsd:string
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:entityLegalFormCode ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange xsd:string
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:fundFamilyWithoutLEI ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                          owl:unionOf ( rdf:PlainLiteral
+                                                                                        xsd:string
+                                                                                      )
+                                                                        ]
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:fundFamilyWithoutLEI ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                          owl:unionOf ( rdf:PlainLiteral
+                                                                                        xsd:string
+                                                                                      )
+                                                                        ]
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:legalJurisdiction ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange xsd:string
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:legalJurisdiction ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange xsd:string
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:otherLegalForm ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange xsd:string
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:otherLegalForm ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange xsd:string
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:successorEntityWithoutLEI ;
+                                                        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                          owl:unionOf ( rdf:PlainLiteral
+                                                                                        xsd:string
+                                                                                      )
+                                                                        ]
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty L1:successorEntityWithoutLEI ;
+                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                          owl:unionOf ( rdf:PlainLiteral
+                                                                                        xsd:string
+                                                                                      )
+                                                                        ]
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:alternativeLanguageHeadquartersAddress ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onClass L1:Address
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:alternativeLanguageLegalAddress ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onClass L1:Address
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:autoASCIITransliteratedHeadquartersAddress ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onClass L1:Address
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:autoASCIITransliteratedLegalAddress ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onClass L1:Address
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:otherValidationAuthority ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onClass L1:ValidationAuthority
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:preferredASCIITransliteratedHeadquartersAddress ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onClass L1:Address
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:preferredASCIITransliteratedLegalAddress ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onClass L1:Address
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:headquartersAddress ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass L1:Address
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:legalAddress ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass L1:Address
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:legalEntityStatus ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass L1:EntityStatus
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:alternativeLanguageEntityName ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                   owl:unionOf ( rdf:PlainLiteral
+                                                                 xsd:string
+                                                               )
+                                                 ]
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:autoASCIITransliteratedLegalName ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                   owl:unionOf ( rdf:PlainLiteral
+                                                                 xsd:string
+                                                               )
+                                                 ]
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:preferredASCIITransliteratedLegalName ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                   owl:unionOf ( rdf:PlainLiteral
+                                                                 xsd:string
+                                                               )
+                                                 ]
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:previousLegalName ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                   owl:unionOf ( rdf:PlainLiteral
+                                                                 xsd:string
+                                                               )
+                                                 ]
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:tradingOrOperatingName ;
+                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                 owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                   owl:unionOf ( rdf:PlainLiteral
+                                                                 xsd:string
+                                                               )
+                                                 ]
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty L1:legalName ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                   owl:unionOf ( rdf:PlainLiteral
+                                                                 xsd:string
+                                                               )
+                                                 ]
+                               ] ;
+               L1:level1CDFFName "Entity"^^xsd:string ;
+               L1:level1CDFFType "lei:EntityType"^^xsd:string ;
+               rdfs:label "legal entity"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> """Legal entity is a partnership, corporation, or other organization having the capacity to negotiate contracts, assume financial obligations, and pay off debts, organized under the laws of some jurisdiction. (FIBO)
+
+Legal entity is characterised in GLEIS by its reference data, enabling its identification."""@en ,
+                                                                "The Entity container element contains the legal entity's reference data, enabling identification."@en ;
+               <http://www.w3.org/2004/02/skos/core#exactMatch> "http://schema.org/Organization"^^xsd:anyURI .
+
+
+###  http://lei.info/voc/l1/LegalEntityIdentifier
+L1:LegalEntityIdentifier rdf:type owl:Class ;
+                         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                           owl:onProperty L1:identifies ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onClass L1:LegalEntity
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty L1:managingLOU ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onClass L1:LocalOperatingUnit
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty L1:registrationStatus ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onClass L1:RegistrationStatus
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty L1:initialRegistrationDate ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange xsd:dateTimeStamp
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty L1:lastUpdateDate ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange xsd:dateTimeStamp
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty L1:leiCode ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange xsd:string
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty L1:nextRenewalDate ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange xsd:dateTimeStamp
+                                         ] ;
+                         L1:level1CDFFName "LEI"^^xsd:string ;
+                         L1:level1CDFFType "lei:LEIType"@en ;
+                         rdfs:comment "Any registration of identifier of legal entity"@en ;
+                         rdfs:label "legal entity identifier"@en ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "A global legal entity identifier (GLEI) specifies identifier of the legal entity as maintained by a local operating unit (LOU). A complete registration of GLEI provides a unique 20-character alphanumeric code based on the ISO 17442 standard and attributes describing the registration of this GLEI with the LOU."@en .
+
+
+###  http://lei.info/voc/l1/LocalOperatingUnit
+L1:LocalOperatingUnit rdf:type owl:Class ;
+                      owl:equivalentClass L2:LocalOperatingUnit ;
+                      rdfs:subClassOf L1:LegalEntity ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty [ owl:inverseOf L1:managingLOU
+                                                       ] ;
+                                        owl:someValuesFrom L1:LegalEntityIdentifier
+                                      ] ;
+                      L1:level1CDFFName "ManagingLOU"^^xsd:string ;
+                      L1:level1CDFFType "lei:LEIType"^^xsd:string ;
+                      rdfs:label "local operating unit"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "The LOU is a registration authority that is responsible for administering  registration of LEIs."@en .
+
+
+###  http://lei.info/voc/l1/RegistrationAuthority
+L1:RegistrationAuthority rdf:type owl:Class ;
+                         rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty L1:otherRegistrationAuthorityID ;
+                                                                  owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                  owl:onDataRange xsd:string
+                                                                ]
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty L1:otherRegistrationAuthorityID ;
+                                                                  owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                  owl:onDataRange xsd:string
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ,
+                                         [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty L1:registrationAuthorityEntityID ;
+                                                                  owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                  owl:onDataRange xsd:string
+                                                                ]
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty L1:registrationAuthorityEntityID ;
+                                                                  owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                  owl:onDataRange xsd:string
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty L1:registrationAuthorityID ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange xsd:string
+                                         ] ;
+                         L1:level1CDFFName "RegistrationAuthority"^^xsd:string ;
+                         L1:level1CDFFType "lei:RegistrationAuthorityType"^^xsd:string ;
+                         rdfs:label "registration authority"@en ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "An identifier for the legal entity in a business registry in the jurisdiction of legal registration, or in the appropriate registration authority."@en .
+
+
+###  http://lei.info/voc/l1/RegistrationStatus
+L1:RegistrationStatus rdf:type owl:Class ;
+                      L1:level1CDFFName "RegistrationStatus"^^xsd:string ;
+                      L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+                      rdfs:label "registration status"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "The status of the legal entity's LEI registration with the Managing LOU."@en .
+
+
+###  http://lei.info/voc/l1/ValidationAuthority
+L1:ValidationAuthority rdf:type owl:Class ;
+                       rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                owl:onProperty L1:otherValidationAuthorityID ;
+                                                                owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                owl:onDataRange xsd:string
+                                                              ]
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty L1:otherValidationAuthorityID ;
+                                                                owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                owl:onDataRange xsd:string
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ,
+                                       [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                owl:onProperty L1:validationAuthorityEntityID ;
+                                                                owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                owl:onDataRange xsd:string
+                                                              ]
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty L1:validationAuthorityEntityID ;
+                                                                owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                owl:onDataRange xsd:string
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty L1:validationAuthorityID ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onDataRange xsd:string
+                                       ] ;
+                       L1:level1CDFFName "ValidationAuthority"^^xsd:string ;
+                       L1:level1CDFFType "lei:ValidationAuthorityType"^^xsd:string ;
+                       rdfs:label "validation authority"@en ;
+                       <http://www.w3.org/2004/02/skos/core#definition> "The (primary) registration authority used by the LOU to validate the entity data."@en .
+
+
+###  http://lei.info/voc/l1/ValidationSource
+L1:ValidationSource rdf:type owl:Class ;
+                    L1:level1CDFFName "ValidationSources"^^xsd:string ;
+                    L1:level1CDFFType "lei:ValidationSourcesEnum"^^xsd:string ;
+                    rdfs:label "validation source"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "The level of validation of the reference data provided by the registrant."@en .
+
+
+###  http://lei.info/voc/l2/AccountingPeriod
+L2:AccountingPeriod rdf:type owl:Class ;
+                    rdfs:subClassOf L2:RelationshipPeriodType ,
+                                    [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                             owl:onProperty L2:hasEndDate ;
+                                                             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                             owl:onDataRange xsd:dateTime
+                                                           ]
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty L2:hasEndDate ;
+                                                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                             owl:onDataRange xsd:dateTime
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ,
+                                    [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                             owl:onProperty L2:startDate ;
+                                                             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                             owl:onDataRange xsd:dateTime
+                                                           ]
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty L2:startDate ;
+                                                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                             owl:onDataRange xsd:dateTime
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ;
+                    L2:level2CDFFName "ACCOUNTING_PERIOD"^^xsd:string ,
+                                      "RelationshipPeriod"^^xsd:string ;
+                    L2:level2CDFFType "PeriodTypeEnum"^^xsd:string ,
+                                      "rr:RelationshipPeriodType"^^xsd:string ;
+                    rdfs:label "accounting period"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "The dates in this instance of RelationshipPeriod indicate the accounting period covered by the most recent validation documents for this relationship."@en .
+
+
+###  http://lei.info/voc/l2/DocumentFilingPeriod
+L2:DocumentFilingPeriod rdf:type owl:Class ;
+                        rdfs:subClassOf L2:RelationshipPeriodType ,
+                                        [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty L2:hasEndDate ;
+                                                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                 owl:onDataRange xsd:dateTime
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty L2:hasEndDate ;
+                                                                 owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onDataRange xsd:dateTime
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ,
+                                        [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty L2:startDate ;
+                                                                 owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                 owl:onDataRange xsd:dateTime
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty L2:startDate ;
+                                                                 owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onDataRange xsd:dateTime
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                        L2:level2CDFFName "DOCUMENT_FILING_PERIOD"^^xsd:string ,
+                                          "RelationshipPeriod"^^xsd:string ;
+                        L2:level2CDFFType "PeriodTypeEnum"^^xsd:string ,
+                                          "rr:RelationshipPeriodType"^^xsd:string ;
+                        rdfs:label "document filing period"@en ;
+                        <http://www.w3.org/2004/02/skos/core#definition> "The dates in this instance of RelationshipPeriod indicate the validity period of a regulatory filing, accounting document, or other document demonstrating the relationship's validity."@en .
+
+
+###  http://lei.info/voc/l2/LegalEntity
+L2:LegalEntity rdf:type owl:Class ;
+               L2:level2CDFFName "NodeID"^^xsd:string ;
+               L2:level2CDFFType "rr:LEIType"^^xsd:string ;
+               rdfs:label "managing LOU"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> "The legal entity participating in the relationship."@en ;
+               <http://www.w3.org/2004/02/skos/core#exactMatch> "http://schema.org/Organization"^^xsd:anyURI .
+
+
+###  http://lei.info/voc/l2/LocalOperatingUnit
+L2:LocalOperatingUnit rdf:type owl:Class ;
+                      rdfs:subClassOf L2:LegalEntity ;
+                      L2:level2CDFFName "ManagingLOU"^^xsd:string ;
+                      L2:level2CDFFType "rr:LEIType"^^xsd:string ;
+                      rdfs:label "local operating unit"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "The LOU that is responsible for administering this relationship record."@en .
+
+
+###  http://lei.info/voc/l2/MeasurementMethod
+L2:MeasurementMethod rdf:type owl:Class ;
+                     L2:level2CDFFName "MeasurementMethod"^^xsd:string ;
+                     L2:level2CDFFType "rr:RelationshipQuantifierType"^^xsd:string ;
+                     rdfs:label "measurement method"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "Specifies the method of measurement (or set of rules) used to quantitatively categorize the relationship."@en .
+
+
+###  http://lei.info/voc/l2/RegistrationStatus
+L2:RegistrationStatus rdf:type owl:Class ;
+                      L2:level2CDFFName "RegistrationStatus"^^xsd:string ;
+                      L2:level2CDFFType "rr:RegistrationStatusEnum"^^xsd:string ;
+                      rdfs:label "relationship registration status"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "The status of the legal entity's relationship record registration with the managing LOU."@en .
+
+
+###  http://lei.info/voc/l2/Relationship
+L2:Relationship rdf:type owl:Class ;
+                rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                         owl:onProperty L2:relationshipPeriod ;
+                                                         owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                         owl:onClass L2:RelationshipPeriodType
+                                                       ]
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty L2:relationshipPeriod ;
+                                                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                         owl:onClass L2:RelationshipPeriodType
+                                                       ]
+                                                     ) ;
+                                  rdf:type owl:Class
+                                ] ,
+                                [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                         owl:onProperty L2:nextRenewalDate ;
+                                                         owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                         owl:onDataRange xsd:dateTimeStamp
+                                                       ]
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty L2:nextRenewalDate ;
+                                                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                         owl:onDataRange xsd:dateTimeStamp
+                                                       ]
+                                                     ) ;
+                                  rdf:type owl:Class
+                                ] ,
+                                [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                         owl:onProperty L2:validationReference ;
+                                                         owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                         owl:onDataRange xsd:anyURI
+                                                       ]
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty L2:validationReference ;
+                                                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                         owl:onDataRange xsd:anyURI
+                                                       ]
+                                                     ) ;
+                                  rdf:type owl:Class
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty L2:relationshipQualifier ;
+                                  owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                  owl:onClass L2:RelationshipQualifier
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty L2:relationshipQuantifier ;
+                                  owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                  owl:onClass L2:RelationshipQuantifier
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty L2:childLegalEntity ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass L2:LegalEntity
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty L2:managingLOU ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass L2:LocalOperatingUnit
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty L2:parentLegalEntity ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass L2:LegalEntity
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty L2:registrationStatus ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass L2:RegistrationStatus
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty L2:relationshipStatus ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass L2:RelationshipStatus
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty L2:relationshipType ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass L2:RelationshipType
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty L2:validationDocument ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass L2:ValidationDocument
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty L2:hasLastUpdateDate ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onDataRange xsd:dateTimeStamp
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty L2:initialRegistrationDate ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onDataRange xsd:dateTimeStamp
+                                ] ;
+                L2:level2CDFFName "Relationship"^^xsd:string ;
+                L2:level2CDFFType "rr:RelationshipContainerType"^^xsd:string ;
+                rdfs:label "relationship"@en ;
+                rdfs:seeAlso <http://lei.info/gleio/rr/RelationshipManifestation> ;
+                <http://www.w3.org/2004/02/skos/core#definition> "It identifiers two entities related by the reported relationship, as well as the type of relationship, dates related to the relationship and other relationship quantifiers and qualifiers."@en .
+
+
+###  http://lei.info/voc/l2/RelationshipPeriod
+L2:RelationshipPeriod rdf:type owl:Class ;
+                      rdfs:subClassOf L2:RelationshipPeriodType ,
+                                      [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                               owl:onProperty L2:hasEndDate ;
+                                                               owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                               owl:onDataRange xsd:dateTime
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty L2:hasEndDate ;
+                                                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                               owl:onDataRange xsd:dateTime
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ,
+                                      [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                               owl:onProperty L2:startDate ;
+                                                               owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                               owl:onDataRange xsd:dateTime
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty L2:startDate ;
+                                                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                               owl:onDataRange xsd:dateTime
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                      L2:level2CDFFName "RELATIONSHIP_PERIOD"^^xsd:string ,
+                                        "RelationshipPeriod"^^xsd:string ;
+                      L2:level2CDFFType "PeriodTypeEnum"^^xsd:string ,
+                                        "rr:RelationshipPeriodType"^^xsd:string ;
+                      rdfs:label "relationship period"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "The dates in this instance of RelationshipPeriod indicate the duration of validity of the relationship itself, as distinct from any administrative or reporting aspects."@en .
+
+
+###  http://lei.info/voc/l2/RelationshipPeriodType
+L2:RelationshipPeriodType rdf:type owl:Class ;
+                          rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty L2:hasEndDate ;
+                                                                   owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                   owl:onDataRange xsd:dateTime
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty L2:hasEndDate ;
+                                                                   owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                   owl:onDataRange xsd:dateTime
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ,
+                                          [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty L2:startDate ;
+                                                                   owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                   owl:onDataRange xsd:dateTime
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty L2:startDate ;
+                                                                   owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                   owl:onDataRange xsd:dateTime
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                          L2:level2CDFFName "RelationshipPeriod"^^xsd:string ;
+                          L2:level2CDFFType "rr:RelationshipPeriodType"^^xsd:string ;
+                          rdfs:label "relationship period"@en ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "Contains start and end dates for a particular type of period, for example, the duration of the relationship itself, the filing or validity period of any documents demonstrating the relationship, or the accounting period they refer to."@en .
+
+
+###  http://lei.info/voc/l2/RelationshipQualifier
+L2:RelationshipQualifier rdf:type owl:Class ;
+                         rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty L2:qualifierCategory ;
+                                                                  owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                  owl:onClass L2:RelationshipQualifierCategory
+                                                                ]
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty L2:qualifierCategory ;
+                                                                  owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                  owl:onClass L2:RelationshipQualifierCategory
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty L2:qualifierDimension ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onClass L2:RelationshipQualifierDimension
+                                         ] ;
+                         L2:level2CDFFName "RelationshipQualifier"^^xsd:string ;
+                         L2:level2CDFFType "rr:RelationshipQualifiersType"^^xsd:string ;
+                         rdfs:label "relationship qualifier"@en ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "Any additional qualitative attributes that help to categorize the relationship."@en .
+
+
+###  http://lei.info/voc/l2/RelationshipQualifierCategory
+L2:RelationshipQualifierCategory rdf:type owl:Class ;
+                                 L2:level2CDFFName "QualifierCategory"^^xsd:string ;
+                                 L2:level2CDFFType "rr:QualifierCategoryTypeEnum"^^xsd:string ;
+                                 rdfs:label "qualifier category"@en ;
+                                 <http://www.w3.org/2004/02/skos/core#definition> "Specifies the additional qualitative attributes that help to categorize the relationship."@en .
+
+
+###  http://lei.info/voc/l2/RelationshipQualifierDimension
+L2:RelationshipQualifierDimension rdf:type owl:Class ;
+                                  L2:level2CDFFName "QualifierDimension"^^xsd:string ;
+                                  L2:level2CDFFType "rr:QualifierDimensionEnum"^^xsd:string ;
+                                  rdfs:label "qualifier dimension"@en ;
+                                  <http://www.w3.org/2004/02/skos/core#definition> "Designates the optional list of additional qualitative attributes that help to categorize the relationship."@en .
+
+
+###  http://lei.info/voc/l2/RelationshipQuantifier
+L2:RelationshipQuantifier rdf:type owl:Class ;
+                          rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty L2:quantifierUnit ;
+                                                                   owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                                                   owl:onClass L2:RelationshipQuantifierUnit
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty L2:quantifierUnit ;
+                                                                   owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                   owl:onClass L2:RelationshipQuantifierUnit
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty L2:measurementMethod ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass L2:MeasurementMethod
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty L2:quantifierAmount ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:decimal
+                                          ] ;
+                          L2:level2CDFFName "RelationshipQuantifier"^^xsd:string ;
+                          L2:level2CDFFType "rr:RelationshipQuantifierType"^^xsd:string ;
+                          rdfs:label "relationship quantifier"@en ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "Any additional quantitative attributes that help to categorize the relationship."@en .
+
+
+###  http://lei.info/voc/l2/RelationshipQuantifierUnit
+L2:RelationshipQuantifierUnit rdf:type owl:Class ;
+                              L2:level2CDFFName "QuantifierUnits"^^xsd:string ;
+                              L2:level2CDFFType "QuantifierUnitsTypeEnum"^^xsd:string ;
+                              rdfs:label "quantifier unit"@en ;
+                              <http://www.w3.org/2004/02/skos/core#definition> "Specifies the units, where applicable, of a measurement made on a relationship."@en .
+
+
+###  http://lei.info/voc/l2/RelationshipStatus
+L2:RelationshipStatus rdf:type owl:Class ;
+                      L2:level2CDFFName "RelationshipStatus"^^xsd:string ;
+                      L2:level2CDFFType "rr:RelationshipStatusEnum"^^xsd:string ;
+                      rdfs:label "relationship status"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "The status of the legal entities' relationship itself: ACTIVE or INACTIVE."@en .
+
+
+###  http://lei.info/voc/l2/RelationshipType
+L2:RelationshipType rdf:type owl:Class ;
+                    L2:level2CDFFName "RelationshipType"^^xsd:string ;
+                    L2:level2CDFFType "rr:RelationshipTypeEnum"^^xsd:string ;
+                    rdfs:label "relationship type"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "A unique code designating the specific category of a directional relationship between two legal entities."@en .
+
+
+###  http://lei.info/voc/l2/ValidationDocument
+L2:ValidationDocument rdf:type owl:Class ;
+                      L2:level2CDFFName "ValidationDocuments"^^xsd:string ;
+                      L2:level2CDFFType "rr:ValidationDocumentsTypeEnum"^^xsd:string ;
+                      rdfs:label "relationship validation document type"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "Type of source document(s) used for validating the relationship."@en .
+
+
+###  http://lei.info/voc/l2/ValidationSource
+L2:ValidationSource rdf:type owl:Class ;
+                    L2:level2CDFFName "ValidationSources"^^xsd:string ;
+                    L2:level2CDFFType "rr:ValidationSourcesTypeEnum"^^xsd:string ;
+                    rdfs:label "relationship validation source"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "Level of relationship validation."@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://lei.info/voc/l1/Active
+L1:Active rdf:type owl:NamedIndividual ,
+                   L1:EntityStatus ;
+          L1:level1CDFFName "ACTIVE"^^xsd:string ;
+          L1:level1CDFFType "lei:EntityStatusEnum"^^xsd:string ;
+          rdfs:label "Active"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "As of the last report or update, the legal entity reported that is was legally registered and operating."@en .
+
+
+###  http://lei.info/voc/l1/Annulled
+L1:Annulled rdf:type owl:NamedIndividual ,
+                     L1:RegistrationStatus ;
+            L1:level1CDFFName "ANNULLED"^^xsd:string ;
+            L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+            rdfs:label "Annulled"@en ;
+            <http://www.w3.org/2004/02/skos/core#definition> "A global legal entity identifier registration that was marked as erroneous or invalid after it was issued."@en .
+
+
+###  http://lei.info/voc/l1/Branch
+L1:Branch rdf:type owl:NamedIndividual ,
+                   L1:EntityCategory ;
+          L1:level1CDFFName "BRANCH"^^xsd:string ,
+                            "EntityCategoryTypeEnum"^^xsd:string ;
+          L1:level1CDFFType "lei:EntityCategoryTypeEnum"^^xsd:string ;
+          rdfs:label "branch"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "The legal entity is a branch of another legal entity."@en .
+
+
+###  http://lei.info/voc/l1/Cancelled
+L1:Cancelled rdf:type owl:NamedIndividual ,
+                      L1:RegistrationStatus ;
+             L1:level1CDFFName "CANCELLED"^^xsd:string ;
+             L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+             rdfs:label "Cancelled"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "A global legal entity identifier registration that was abandoned prior to issuance of a global legal entity identifier."@en .
+
+
+###  http://lei.info/voc/l1/CorporateAction
+L1:CorporateAction rdf:type owl:NamedIndividual ,
+                            L1:EntityExpirationReason ;
+                   L1:level1CDFFName "CORPORATE_ACTION"^^xsd:string ;
+                   L1:level1CDFFType "lei:EntityExpirationReasonEnum"^^xsd:string ;
+                   rdfs:label "Corporate Action"@en ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "The legal entity was acquired or merged with another legal entity."@en .
+
+
+###  http://lei.info/voc/l1/Dissolved
+L1:Dissolved rdf:type owl:NamedIndividual ,
+                      L1:EntityExpirationReason ;
+             L1:level1CDFFName "DISSOLVED"^^xsd:string ;
+             L1:level1CDFFType "lei:EntityExpirationReasonEnum"^^xsd:string ;
+             rdfs:label "Dissolved"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "The legal entity ceased to operate."@en .
+
+
+###  http://lei.info/voc/l1/Duplicate
+L1:Duplicate rdf:type owl:NamedIndividual ,
+                      L1:RegistrationStatus ;
+             L1:level1CDFFName "DUPLICATE"^^xsd:string ;
+             L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+             rdfs:comment """The DUPLICATE status is assigned to the non-surviving registration (i.e., the LEI that should no longer be used). 
+
+Only one of the potential multiple identifiers will survive; for all other duplicate registrations:
+1. The RegistrationStatus is set to DUPLICATE
+2. The LEI of the surviving LEI Registration is set in the SuccessorLEI data element of (each) duplicate LEI registration
+3. The LastUpdateDate is set to reflect the date of this update
+4. No further updates of the DUPLICATE registration record will occur"""@en ;
+             rdfs:label "Duplicate"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "A global legal entity identifier registration that has been determined to be a duplicate registration of the same legal entity as another global legal entity identifier registration."@en .
+
+
+###  http://lei.info/voc/l1/EntitySuppliedOnly
+L1:EntitySuppliedOnly rdf:type owl:NamedIndividual ,
+                               L1:ValidationSource ;
+                      L1:level1CDFFName "ENTITY_SUPPLIED_ONLY"^^xsd:string ;
+                      L1:level1CDFFType "lei:ValidationSourcesEnum"^^xsd:string ;
+                      rdfs:label "Entity Supplied Only"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "Based on the validation procedures in use by the local operating unit responsible for the record, the information associated with this record has significant reliance on the information that a submitter provided due to the unavailability of corroborating information."@en .
+
+
+###  http://lei.info/voc/l1/FullyCorroborated
+L1:FullyCorroborated rdf:type owl:NamedIndividual ,
+                              L1:ValidationSource ;
+                     L1:level1CDFFName "FULLY_CORROBORATED"^^xsd:string ;
+                     L1:level1CDFFType "lei:ValidationSourcesEnum"^^xsd:string ;
+                     rdfs:label "Fully Corroborated"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "Based on the validation procedures in use by the local operating unit responsible for the record, there is sufficient information contained in authoritative public sources to corroborate the information that the submitter has provided for the record."@en .
+
+
+###  http://lei.info/voc/l1/Fund
+L1:Fund rdf:type owl:NamedIndividual ,
+                 L1:EntityCategory ;
+        L1:level1CDFFName "EntityCategoryTypeEnum"^^xsd:string ,
+                          "FUND"^^xsd:string ;
+        L1:level1CDFFType "lei:EntityCategoryTypeEnum"^^xsd:string ;
+        rdfs:label "fund"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> "The legal entity is a fund managed by another legal entity."@en .
+
+
+###  http://lei.info/voc/l1/Inactive
+L1:Inactive rdf:type owl:NamedIndividual ,
+                     L1:EntityStatus ;
+            L1:level1CDFFName "INACTIVE"^^xsd:string ;
+            L1:level1CDFFType "lei:EntityStatusEnum"^^xsd:string ;
+            rdfs:label "Inactive"@en ;
+            <http://www.w3.org/2004/02/skos/core#definition> """It has been determined that the legal entity that was assigned the global legal entity identifier is no longer legally registered and/or operating, whether as a result of:
+1. Business closure
+2. Acquisition by or merger with another (or new) entity
+3. Determination of illegitimacy."""@en .
+
+
+###  http://lei.info/voc/l1/Issued
+L1:Issued rdf:type owl:NamedIndividual ,
+                   L1:RegistrationStatus ;
+          L1:level1CDFFName "ISSUED"^^xsd:string ;
+          L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+          rdfs:label "Issued"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "A global legal entity identifier registration that has been validated and issued, and which identifies an entity that was an operating legal entity as of the last update."@en .
+
+
+###  http://lei.info/voc/l1/Lapsed
+L1:Lapsed rdf:type owl:NamedIndividual ,
+                   L1:RegistrationStatus ;
+          L1:level1CDFFName "LAPSED"^^xsd:string ;
+          L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+          rdfs:comment """After being issued an LEI, an entity must regularly do the following:
+- Periodically verify the continued accuracy of its registration reference data that is recorded in the LOU that is responsible for managing the LEI registration of the entity, updating any aspect of the registration reference data that has changed;
+- Periodically renew its LEI registration agreement with the LOU, paying the renewal fee.
+
+(Although both of the above actions are typically performed at the same time, it is certainly possible that the frequency of each action could be different.) If, after being issued an LEI,
+
+- A legal entity fails to renew and re-certify its LEI registration with the LOU responsible to manage the registration by the leiNextRenewalDate, and
+- The legal entity fails to do so for a pre-determined (as yet unspecified) period of time, and
+- The legal entity is not known by public sources to have ceased operation
+
+Then
+1. The leiRegistrationStatus is set to LAPSED,
+2. Updates to the LEI registration are permitted, notably to reinstate the registration to the ISSUED status."""@en ;
+          rdfs:label "Lapsed"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "A global legal entity identifier registration that has not been renewed and has exceeded any allowed grace period for renewal."@en .
+
+
+###  http://lei.info/voc/l1/Merged
+L1:Merged rdf:type owl:NamedIndividual ,
+                   L1:RegistrationStatus ;
+          L1:level1CDFFName "MERGED"^^xsd:string ;
+          L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+          rdfs:comment """If
+- After being issued an LEI, the entity is acquired by, or merged with, another legal entity;
+- Per agreements among the parties to the transaction, the LEI of the acquired or merged entity will not be used to identify the surviving entity (or if a new entity is created that is issued a new LEI)
+
+Then
+1. The leiRegistrationStatus is set to “MERGED”,
+2. The LEI of the surviving/new legal entity is set in the successorLEI data element of (each) LEI registration that is no longer to be used;
+3. The leiRecordLastUpdate is set to reflect the date of this update,
+4. The EntityExpirationDate is also set to the date of this update,
+5. The EntityExpirationReason is set to “CORPORATE_ACTION”,
+6. The EntityStatus is set to “INACTIVE”; and
+7. No further updates of the MERGED registration record(s) will occur."""@en ;
+          rdfs:label "Merged"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "A global legal entity identifier registration for an entity that has been merged into another legal entity, such that this legal entity no longer exists as an operating entity."@en .
+
+
+###  http://lei.info/voc/l1/Other
+L1:Other rdf:type owl:NamedIndividual ,
+                  L1:EntityExpirationReason ;
+         L1:level1CDFFName "OTHER"^^xsd:string ;
+         L1:level1CDFFType "lei:EntityExpirationReasonEnum"^^xsd:string ;
+         rdfs:label "Other"@en ;
+         <http://www.w3.org/2004/02/skos/core#definition> "The reason for expiry is not corporate action or dissolved."@en .
+
+
+###  http://lei.info/voc/l1/PartiallyCorroborated
+L1:PartiallyCorroborated rdf:type owl:NamedIndividual ,
+                                  L1:ValidationSource ;
+                         L1:level1CDFFName "PARTIALLY_CORROBORATED"^^xsd:string ;
+                         L1:level1CDFFType "lei:ValidationSourcesEnum"^^xsd:string ;
+                         rdfs:label "Fully Corroborated"@en ,
+                                    "Partially Corroborated"@en ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "Based on the validation procedures in use by the local operating unit responsible for the record, the information supplied by the registrant can be partially corroborated by public authoritative sources, while some of the record is dependent upon the information that the registrant submitted, either due to conflicts with authoritative information, or due to data unavailability."@en .
+
+
+###  http://lei.info/voc/l1/Pending
+L1:Pending rdf:type owl:NamedIndividual ,
+                    L1:ValidationSource ;
+           L1:level1CDFFName "PENDING"^^xsd:string ;
+           L1:level1CDFFType "lei:ValidationSourcesEnum"^^xsd:string ;
+           rdfs:label "Pending"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> "The validation of the reference data provided by the registrant has not yet occurred."@en .
+
+
+###  http://lei.info/voc/l1/PendingArchival
+L1:PendingArchival rdf:type owl:NamedIndividual ,
+                            L1:RegistrationStatus ;
+                   L1:level1CDFFName "PENDING_ARCHIVAL"^^xsd:string ;
+                   L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+                   rdfs:label "Pending Archival"@en ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "A global legal entity identifier registration is about to be transferred to a different local operating unit, after which its registration status will revert to a non-pending status. The pending archival status serves to inform recipients of local operating unit provided data files that a global legal entity identifier record will be removed from that local operating unit’s published file after the transfer is complete."@en .
+
+
+###  http://lei.info/voc/l1/PendingTransfer
+L1:PendingTransfer rdf:type owl:NamedIndividual ,
+                            L1:RegistrationStatus ;
+                   L1:level1CDFFName "PENDING_TRANSFER"^^xsd:string ;
+                   L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+                   rdfs:label "Pending Transfer"@en ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "A global legal entity identifier registration that has been requested to be transferred to another local operating unit. The request is being processed at the sending local operating unit. When the receiving local operating unit is ready, the status will be changed to pending archival by the sending local operating unit prior to completion of the transfer."@en .
+
+
+###  http://lei.info/voc/l1/PendingValidation
+L1:PendingValidation rdf:type owl:NamedIndividual ,
+                              L1:RegistrationStatus ;
+                     L1:level1CDFFName "PENDING_VALIDATION"^^xsd:string ;
+                     L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+                     rdfs:isDefinedBy "LEI Data File Format 1.0, section: 3.5.7." ;
+                     rdfs:label "Pending Validation"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "An application for a global legal entity identifier that has been submitted and which is being processed and validated. A global legal entity identifier registrations in the pending state are not intended for public release, but could be used internally between local operating units."@en .
+
+
+###  http://lei.info/voc/l1/Retired
+L1:Retired rdf:type owl:NamedIndividual ,
+                    L1:RegistrationStatus ;
+           L1:level1CDFFName "RETIRED"^^xsd:string ;
+           L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+           rdfs:comment """If
+- After being issued an LEI, the entity ceases to operate (goes out of business and/or dissolves its legal standing)
+- The entity informs the LOU of the cessation of business, OR, the managing LOU determines by public sources that the legal entity has been dissolved or ceased to operate (and the LOU seeks to confirm this status through all available channels with the entity)
+
+Then
+1. The leiRegistrationStatus is set to “RETIRED”;
+2. The leiRecordLastUpdate is set to reflect the date of this update;
+3. The EntityExpirationDate is also set to the date of this update;
+4. The EntityExpirationReason is set to “DISSOLVED”;
+5. The EntityStatus is set to “INACTIVE”; and
+6. No further updates of the RETIRED registration record will occur."""@en ;
+           rdfs:label "Retired"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> "A global legal entity identifier registration for an entity that has ceased operation, without having been merged into another entity."@en .
+
+
+###  http://lei.info/voc/l1/SoleProprietor
+L1:SoleProprietor rdf:type owl:NamedIndividual ,
+                           L1:EntityCategory ;
+                  L1:level1CDFFName "EntityCategoryTypeEnum"^^xsd:string ,
+                                    "SOLE_PROPRIETOR"^^xsd:string ;
+                  L1:level1CDFFType "lei:EntityCategoryTypeEnum"^^xsd:string ;
+                  rdfs:label "sole proprietor"@en ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "The legal entity is an individual acting in a business capacity."@en .
+
+
+###  http://lei.info/voc/l1/Transferred
+L1:Transferred rdf:type owl:NamedIndividual ,
+                        L1:RegistrationStatus ;
+               L1:level1CDFFName "TRANSFERRED"^^xsd:string ;
+               L1:level1CDFFType "lei:RegistrationStatusEnum"^^xsd:string ;
+               rdfs:label "Transferred"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> "A global legal entity identifier registration that has been transferred to a different local operating unit as the managing local operating unit. A record in this state is not published, but may be used internally by the prior local operating unit for audit trail purposes."@en .
+
+
+###  http://lei.info/voc/l2/AccountingConsolidation
+L2:AccountingConsolidation rdf:type owl:NamedIndividual ,
+                                    L2:MeasurementMethod ;
+                           L2:level2CDFFName "ACCOUNTING_CONSOLIDATION"^^xsd:string ;
+                           L2:level2CDFFType "rr:RelationshipQuantifierType"^^xsd:string ;
+                           rdfs:label "measurement method"@en ;
+                           <http://www.w3.org/2004/02/skos/core#definition> "Accounting consolidation holds when \"[in the] financial statements of a group [...] the assets, liabilities, equity, income, expenses and cash flows of the parent and its subsidiaries are presented as those of a single economic entity (please see http://www.iasplus.com/en/standards/ias/ias27-2011)."@en .
+
+
+###  http://lei.info/voc/l2/AccountingStandard
+L2:AccountingStandard rdf:type owl:NamedIndividual ,
+                               L2:RelationshipQualifierDimension ;
+                      L2:level2CDFFName "ACCOUNTING_STANDARD"^^xsd:string ;
+                      L2:level2CDFFType "rr:QualifierCategoryTypeEnum"^^xsd:string ;
+                      rdfs:label "accounting standard"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> """The accounting standard applied to determine the definition of e.g. ultimate or direct accounting consolidating parent for the relationship detailed
+in GLEIS RelationshipRecord. The relevant accounting standard is that applicable to the \"parent\" entity."""@en .
+
+
+###  http://lei.info/voc/l2/AccountsFiling
+L2:AccountsFiling rdf:type owl:NamedIndividual ,
+                           L2:ValidationDocument ;
+                  L2:level2CDFFName "ACCOUNTS_FILING"^^xsd:string ;
+                  L2:level2CDFFType "ValidationDocumentsTypeEnum"^^xsd:string ;
+                  rdfs:label "consolidated accounting statement"@en ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "A consolidated financial (accounting) statement, prepared and submitted to the relevant authority."@en .
+
+
+###  http://lei.info/voc/l2/Active
+L2:Active rdf:type owl:NamedIndividual ,
+                   L2:RelationshipStatus ;
+          L2:level2CDFFName "ACTIVE"^^xsd:string ;
+          L2:level2CDFFType "rr:RelationshipStatusEnum"^^xsd:string ;
+          rdfs:label "active"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "As of the last report or update, the reporting legal entity reported that it is legally registered and/or operating, AND that the relationship is still valid."@en .
+
+
+###  http://lei.info/voc/l2/Annulled
+L2:Annulled rdf:type owl:NamedIndividual ,
+                     L2:RegistrationStatus ;
+            L2:level2CDFFName "ANNULLED"^^xsd:string ;
+            L2:level2CDFFType "rr:RegistrationStatusEnum"^^xsd:string ;
+            rdfs:label "annulled"@en ;
+            <http://www.w3.org/2004/02/skos/core#definition> "A relationship data report that was marked as erroneous or invalid after it was published. The relationship report is kept in publication for historical audit trail purposes only (so that data recipients can correct their local data)."@en .
+
+
+###  http://lei.info/voc/l2/Contract
+L2:Contract rdf:type owl:NamedIndividual ,
+                     L2:ValidationDocument ;
+            L2:level2CDFFName "CONTRACTS"^^xsd:string ;
+            L2:level2CDFFType "ValidationDocumentsTypeEnum"^^xsd:string ;
+            rdfs:label "Contact(s) attesting to the validity of the relationship"@en ;
+            <http://www.w3.org/2004/02/skos/core#definition> "Contact(s) attesting to the validity of the relationship"@en .
+
+
+###  http://lei.info/voc/l2/Duplicate
+L2:Duplicate rdf:type owl:NamedIndividual ,
+                      L2:RegistrationStatus ;
+             L2:level2CDFFName "DUPLICATE"^^xsd:string ;
+             L2:level2CDFFType "rr:RegistrationStatusEnum"^^xsd:string ;
+             rdfs:label "duplicate"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "A relationship data report that has been determined to be a duplicate registration of the same relationship. In many cases this will mean more than one report with e.g. the same 2 entity IDs, the same relationship type, certain status values and the same relationship date(s), but this determination will depend on the relationship type in question."@en .
+
+
+###  http://lei.info/voc/l2/EntitySuppliedOnly
+L2:EntitySuppliedOnly rdf:type owl:NamedIndividual ,
+                               L2:ValidationSource ;
+                      L2:level2CDFFName "ENTITY_SUPPLIED_ONLY"^^xsd:string ;
+                      L2:level2CDFFType "ValidationSourcesTypeEnum"^^xsd:string ;
+                      rdfs:label "EntitySuppliedOnly"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "Based on the validation procedures in use by the LOU responsible for the record, the information associated with this record has significant reliance on the information that a submitter provided due to the unavailability of corroborating information."@en .
+
+
+###  http://lei.info/voc/l2/FullyCorroborated
+L2:FullyCorroborated rdf:type owl:NamedIndividual ,
+                              L2:ValidationSource ;
+                     L2:level2CDFFName "FULLY_CORROBORATED"^^xsd:string ;
+                     L2:level2CDFFType "ValidationSourcesTypeEnum"^^xsd:string ;
+                     rdfs:label "fully corroborated"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "The relationship data provided by the registrant has been validated against an explicit relationship statement found in key sources (e.g. consolidated financial statements)."@en .
+
+
+###  http://lei.info/voc/l2/IFRS
+L2:IFRS rdf:type owl:NamedIndividual ,
+                 L2:RelationshipQualifierCategory ;
+        L2:level2CDFFName "IFRS"^^xsd:string ;
+        L2:level2CDFFType "rr:QualifierCategoryTypeEnum"^^xsd:string ;
+        rdfs:label "International Financial Reporting Standard"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> "International Financial Reporting Standard (developed by the International Accounting Standards Board – IASB see http://www.ifrs.org)."@en .
+
+
+###  http://lei.info/voc/l2/Inactive
+L2:Inactive rdf:type owl:NamedIndividual ,
+                     L2:RelationshipStatus ;
+            L2:level2CDFFName "INACTIVE"^^xsd:string ;
+            L2:level2CDFFType "rr:RelationshipStatusEnum"^^xsd:string ;
+            rdfs:label "inactive"@en ;
+            <http://www.w3.org/2004/02/skos/core#definition> "It has been determined that the relationship ended, e.g. because entity that reported this relationship is no longer legally registered and/or operating; or the relationship is no longer valid for other reasons."@en .
+
+
+###  http://lei.info/voc/l2/Lapsed
+L2:Lapsed rdf:type owl:NamedIndividual ,
+                   L2:RegistrationStatus ;
+          L2:level2CDFFName "LAPSED"^^xsd:string ;
+          L2:level2CDFFType "rr:RegistrationStatusEnum"^^xsd:string ;
+          rdfs:label "lapsed"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "A relationship data report that has not been renewed by the next renewal date."@en .
+
+
+###  http://lei.info/voc/l2/OtherAccountingStandard
+L2:OtherAccountingStandard rdf:type owl:NamedIndividual ,
+                                    L2:RelationshipQualifierCategory ;
+                           L2:level2CDFFName "OTHER_ACCOUNTING_STANDARD"^^xsd:string ;
+                           L2:level2CDFFType "rr:QualifierCategoryTypeEnum"^^xsd:string ;
+                           rdfs:label "accounting standard different from IFRS and US_GAAP"@en ;
+                           <http://www.w3.org/2004/02/skos/core#definition> "A financial reporting (accounting) standard not otherwise listed in the latest version of the relationship data file format."@en .
+
+
+###  http://lei.info/voc/l2/PartiallyCorroborated
+L2:PartiallyCorroborated rdf:type owl:NamedIndividual ,
+                                  L2:ValidationSource ;
+                         L2:level2CDFFName "PARTIALLY_CORROBORATED"^^xsd:string ;
+                         L2:level2CDFFType "ValidationSourcesTypeEnum"^^xsd:string ;
+                         rdfs:label "partially corroborated"@en ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "Based on the validation procedures in use by the LOU responsible for the record, the information supplied by the submitter can be partially corroborated by supporting sources (e.g. financial statements with other definitions of the relevant relationship type; quarterly or annual regulatory filings, contracts and other documents used in preparing financial statements)."@en .
+
+
+###  http://lei.info/voc/l2/Pending
+L2:Pending rdf:type owl:NamedIndividual ,
+                    L2:ValidationSource ;
+           L2:level2CDFFName "PENDING"^^xsd:string ;
+           L2:level2CDFFType "ValidationSourcesTypeEnum"^^xsd:string ;
+           rdfs:label "pending"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> "The validation of the relationship data provided by the registrant has not yet occurred. Records with this validation sources value MUST not be published."@en .
+
+
+###  http://lei.info/voc/l2/PendingArchival
+L2:PendingArchival rdf:type owl:NamedIndividual ,
+                            L2:RegistrationStatus ;
+                   L2:level2CDFFName "PENDING_ARCHIVAL"^^xsd:string ;
+                   L2:level2CDFFType "rr:RegistrationStatusEnum"^^xsd:string ;
+                   rdfs:label "pending archival"@en ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "This relationship data report is about to be transferred to a different LOU, after which its registration status will revert to a non-pending status. The PendingArchival status serves to inform recipients of LOU-provided data files that a relationship record will be removed from that LOU’s published file after the transfer is complete"@en .
+
+
+###  http://lei.info/voc/l2/PendingTransfer
+L2:PendingTransfer rdf:type owl:NamedIndividual ,
+                            L2:RegistrationStatus ;
+                   L2:level2CDFFName "PENDING_TRANSFER"^^xsd:string ;
+                   L2:level2CDFFType "rr:RegistrationStatusEnum"^^xsd:string ;
+                   rdfs:label "pending transfer"@en ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "A relationship data report for which a transfer to another LOU has been requested. The request is being processed at the sending LOU. When the receiving LOU is ready, the status will be changed to PendingArchival by the sending LOU prior to completion of the transfer."@en .
+
+
+###  http://lei.info/voc/l2/PendingValidation
+L2:PendingValidation rdf:type owl:NamedIndividual ,
+                              L2:RegistrationStatus ;
+                     L2:level2CDFFName "PENDING_VALIDATION"^^xsd:string ;
+                     L2:level2CDFFType "rr:RegistrationStatusEnum"^^xsd:string ;
+                     rdfs:label "pending validation"@en ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "A relationship data report that has been submitted to the LOU and which is being processed and validated, prior to publication."@en .
+
+
+###  http://lei.info/voc/l2/Percentage
+L2:Percentage rdf:type owl:NamedIndividual ,
+                       L2:RelationshipQuantifierUnit ;
+              L2:level2CDFFName "PERCENTAGE"^^xsd:string ;
+              L2:level2CDFFType "QuantifierUnitsTypeEnum"^^xsd:string ;
+              rdfs:label "percentage"@en .
+
+
+###  http://lei.info/voc/l2/Published
+L2:Published rdf:type owl:NamedIndividual ,
+                      L2:RegistrationStatus ;
+             L2:level2CDFFName "PUBLISHED"^^xsd:string ;
+             L2:level2CDFFType "rr:RegistrationStatusEnum"^^xsd:string ;
+             rdfs:label "published"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "A relationship data report that has been validated and published, and which is reported by an entity that was an operating legal entity as of the last update."@en .
+
+
+###  http://lei.info/voc/l2/RegulatoryFiling
+L2:RegulatoryFiling rdf:type owl:NamedIndividual ,
+                             L2:ValidationDocument ;
+                    L2:level2CDFFName "REGULATORY_FILING"^^xsd:string ;
+                    L2:level2CDFFType "ValidationDocumentsTypeEnum"^^xsd:string ;
+                    rdfs:label "annual regulatory filing"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "An annual regulatory filing providing public information on parent relationships."@en .
+
+
+###  http://lei.info/voc/l2/Retired
+L2:Retired rdf:type owl:NamedIndividual ,
+                    L2:RegistrationStatus ;
+           L2:level2CDFFName "RETIRED"^^xsd:string ;
+           L2:level2CDFFType "rr:RegistrationStatusEnum"^^xsd:string ;
+           rdfs:label "retired"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> "The relationship is considered to have ended, but the relationship report is kept in publication for historical audit trail purposes."@en .
+
+
+###  http://lei.info/voc/l2/SupportingDocument
+L2:SupportingDocument rdf:type owl:NamedIndividual ,
+                               L2:ValidationDocument ;
+                      L2:level2CDFFName "SUPPORTING_DOCUMENTS"^^xsd:string ;
+                      L2:level2CDFFType "ValidationDocumentsTypeEnum"^^xsd:string ;
+                      rdfs:label "Other documents supporting the preparation of consolidated financial statement"@en ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "Other documents supporting the preparation of consolidated financial statements"@en .
+
+
+###  http://lei.info/voc/l2/Transferred
+L2:Transferred rdf:type owl:NamedIndividual ,
+                        L2:RegistrationStatus ;
+               L2:level2CDFFName "TRANSFERRED"^^xsd:string ;
+               L2:level2CDFFType "rr:RegistrationStatusEnum"^^xsd:string ;
+               rdfs:label "transferred"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> "A relationship data report that has been transferred to a different LOU as the managing LOU. A record in this state is not published, but may be used internally by the prior LOU for audit trail purposes."@en .
+
+
+###  http://lei.info/voc/l2/USGAAP
+L2:USGAAP rdf:type owl:NamedIndividual ,
+                   L2:RelationshipQualifierCategory ;
+          L2:level2CDFFName "US_GAAP"^^xsd:string ;
+          L2:level2CDFFType "rr:QualifierCategoryTypeEnum"^^xsd:string ;
+          rdfs:label "United States-Generally Accepted Accounting Principles"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "United States-Generally Accepted Accounting Principles."@en .
+
+
+###  http://lei.info/voc/l2/isDirectlyConsolidatedBy
+L2:isDirectlyConsolidatedBy rdf:type owl:NamedIndividual ,
+                                     L2:RelationshipType ;
+                            L2:level2CDFFName "IS_DIRECTLY_CONSOLIDATED_BY"^^xsd:string ;
+                            L2:level2CDFFType "rr:RelationshipTypeEnum"^^xsd:string ;
+                            rdfs:label "is directly consolidated by"@en ;
+                            <http://www.w3.org/2004/02/skos/core#definition> "\"Child\" entity is directly consolidated by \"parent\" entity. The \"child\" entity has its accounts fully consolidated by the \"parent\" entity, in the sense given by the accounting standard(s) specified in RelationshipQualifier; the \"parent\" entity is the closest fully consolidating parent to the \"child\" entity in any applicable hierarchical ownership structure."@en .
+
+
+###  http://lei.info/voc/l2/isInternationalBranchOf
+L2:isInternationalBranchOf rdf:type owl:NamedIndividual ,
+                                    L2:RelationshipType ;
+                           L2:level2CDFFName "IS_INTERNATIONAL_BRANCH_OF"^^xsd:string ;
+                           L2:level2CDFFType "rr:RelationshipTypeEnum"^^xsd:string ;
+                           rdfs:label "is an international branch of"@en ;
+                           <http://www.w3.org/2004/02/skos/core#definition> "\"Child\" entity is an international branch of the legal entity designated by \"parent\" entity  (in jurisdiction country of \"child\" entity). The \"parent\" entity is the Head Office and must have an LEI."@en .
+
+
+###  http://lei.info/voc/l2/isUltimatelyConsolidatedBy
+L2:isUltimatelyConsolidatedBy rdf:type owl:NamedIndividual ,
+                                       L2:RelationshipType ;
+                              L2:level2CDFFName "IS_ULTIMATELY_CONSOLIDATED_BY"^^xsd:string ;
+                              L2:level2CDFFType "rr:RelationshipTypeEnum"^^xsd:string ;
+                              rdfs:label "is ultimately consolidated by"@en ;
+                              <http://www.w3.org/2004/02/skos/core#definition> "\"Child\" entity is ultimately consolidated by \"parent\" entity. The \"child\" entity has its accounts fully consolidated by the \"parent\" entity in the sense given by the accounting standard(s) specified in RelationshipQualifier; the \"parent\" entity is the most distant fully consolidating parent from the \"child\" entity in any applicable hierarchical ownership structure."@en .
+
+
+###  http://lei.info/voc/l2/supplied
+L2:supplied rdf:type owl:NamedIndividual ,
+                     L2:ValidationDocument ;
+            L2:level2CDFFName "OTHER_OFFICIAL_DOCUMENTS"^^xsd:string ;
+            L2:level2CDFFType "ValidationDocumentsTypeEnum"^^xsd:string ;
+            rdfs:label "Other official document(s) attesting to the validity of the relationship"@en ;
+            <http://www.w3.org/2004/02/skos/core#definition> "Other official document(s) attesting to the validity of the relationship."@en .
+
+
+[ owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger
+] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+   owl:members ( L1:Address
+                 L1:EntityCategory
+                 L1:EntityExpirationReason
+                 L1:EntityStatus
+                 L1:LegalEntityIdentifier
+                 L1:RegistrationAuthority
+                 L1:RegistrationStatus
+                 L1:ValidationAuthority
+                 L1:ValidationSource
+                 L2:MeasurementMethod
+                 L2:RegistrationStatus
+                 L2:Relationship
+                 L2:RelationshipPeriodType
+                 L2:RelationshipQualifier
+                 L2:RelationshipQualifierCategory
+                 L2:RelationshipQualifierDimension
+                 L2:RelationshipQuantifier
+                 L2:RelationshipQuantifierUnit
+                 L2:RelationshipStatus
+                 L2:RelationshipType
+                 L2:ValidationDocument
+                 L2:ValidationSource
+               )
+ ] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( L2:AccountingPeriod
+                L2:DocumentFilingPeriod
+                L2:RelationshipPeriod
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
