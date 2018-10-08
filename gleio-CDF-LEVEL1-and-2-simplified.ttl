@@ -13,7 +13,7 @@
                         owl:versionIRI <http://lei.info/voc/> ;
                         rdfs:comment """Contact
 Robert Trypuz (robert.trypuz@makolab.com)"""@en ,
-                                     """Global Legal Entity Identifier Ontology (GLEIO) for LEI-CDF LEVEL 2
+                                     """Global Legal Entity Identifier Ontology (GLEIO) for CDF format of LEVEL 1 & 2.
 
 This ontology - Global Legal Entity Identifier Ontology (GLEIO in short) - has been created by MakoLab's R&D Group. GLEIO is a semantic representation of LEI Common Data File format for LEVEL 1 and 2."""@en ;
                         owl:versionInfo "version 1.0"@en .
